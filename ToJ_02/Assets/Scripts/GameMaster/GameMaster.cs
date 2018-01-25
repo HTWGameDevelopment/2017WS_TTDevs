@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.IO;
 
-public class CreepReader : MonoBehaviour {
+public class GameMaster : MonoBehaviour {
     public Transform sphereCreep;
     public Transform cubeCreep;
     public Transform cylinderCreep;
@@ -34,13 +34,12 @@ public class CreepReader : MonoBehaviour {
             {
                 line = sr.ReadLine();
                 String[] substrings = line.Split(':'); 
-                //printArray(substrings);
                 int type;
                 int amount;
                 Int32.TryParse(substrings[0], out type);
                 Int32.TryParse(substrings[1], out amount);
                 StartCoroutine(spawnThem(type, amount, 0, 0));
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(8f);
 
             }
             sr.Close();
@@ -69,7 +68,7 @@ public class CreepReader : MonoBehaviour {
                 for (int i = 0; i <= amount; i++)
                 {
                     Instantiate(sphereCreep, spawnPoint.position, spawnPoint.rotation);
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.5f);
                 }
                 break;
 
@@ -77,7 +76,7 @@ public class CreepReader : MonoBehaviour {
                 for (int i = 0; i <= amount; i++)
                 {
                     Instantiate(cubeCreep, spawnPoint.position, spawnPoint.rotation);
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.5f);
                 }
                 break;
 
@@ -85,7 +84,7 @@ public class CreepReader : MonoBehaviour {
                 for (int i = 0; i <= amount; i++)
                 {
                     Instantiate(cylinderCreep, spawnPoint.position, spawnPoint.rotation);
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.5f);
                 }
                 break;
         }

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToJ_02", "ToJ_02.csproj", "{D7D83B14-7174-5D8A-3366-038688D1DB0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToJ_02.Editor.Plugins", "ToJ_02.Editor.Plugins.csproj", "{8F97F0A4-3AAD-E097-52E9-5D642D0AE710}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{D7D83B14-7174-5D8A-3366-038688D1DB0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7D83B14-7174-5D8A-3366-038688D1DB0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7D83B14-7174-5D8A-3366-038688D1DB0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F97F0A4-3AAD-E097-52E9-5D642D0AE710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F97F0A4-3AAD-E097-52E9-5D642D0AE710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F97F0A4-3AAD-E097-52E9-5D642D0AE710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F97F0A4-3AAD-E097-52E9-5D642D0AE710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
