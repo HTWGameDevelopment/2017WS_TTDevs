@@ -293,6 +293,7 @@
     <Compile Include="Assets\Scripts\UI\MainCameraController.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\UI\showHealth.cs" />
+    <Compile Include="Assets\Scripts\UI\TurretSelection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

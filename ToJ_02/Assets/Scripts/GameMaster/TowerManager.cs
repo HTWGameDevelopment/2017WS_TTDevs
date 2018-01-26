@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine.UI;
 
 public class TowerManager : MonoBehaviour {
     public static TowerManager single;
@@ -25,28 +26,58 @@ public class TowerManager : MonoBehaviour {
 
 
     public GameObject smallSingleTargetPrefab;
+    public GameObject smallAoePrefab;
+    public GameObject bigAoePrefab;
+    public GameObject aroundTurretPrefab;
     // Other TurretObtions
 
+    public Button button1;
+    public Button button2;
+    public Button button3;
+    public Button button4;
+    public Button button5;
+
+    public Sprite icon1;
+    public Sprite icon2;
+    public Sprite icon3;
+    public Sprite icon4;
+
     private float[,] turretsToSelect = new float[5,7];//[x,y] x = Turrets 1-5 y0= turretType y1 = turretRange y2 = turretDmg y3 = turretSpd y4 = turret cost y5 = element y6 = active
-    public int selectedTurret = 0;
+    public int selectedTurret;
 
     void Start()
     {
         readTurretInfo("Towers/Turrets.txt");
-        
+        setUpButtonIcons();
+    }
+
+    public void selectTurret(int number)
+    {
+        selectedTurret = number;
     }
 
     public GameObject getSelectedTurretPrefab()
     {
+        if (selectedTurret == -1 || selectedTurret > 4)
+        {
+            return null;
+        }
         int cases = (int)turretsToSelect[selectedTurret, 0];
         switch (cases)
         {
             case 1:
                 return smallSingleTargetPrefab;
+            case 2:
+                return smallAoePrefab;
+            case 3:
+                return bigAoePrefab;
+            case 4:
+                return aroundTurretPrefab;
             default:
-                return smallSingleTargetPrefab;
+                return null;
         }
     }
+
 
     public float getSelectedTurretRange()
     {
@@ -123,6 +154,35 @@ public class TowerManager : MonoBehaviour {
             return 0.5f*multiplier;
         }
         return stat;
+    }
+
+    private void setUpButtonIcons()
+    {
+        button1.GetComponent<Image>().sprite = getIcon((int)turretsToSelect[0, 0]);
+        button2.GetComponent<Image>().sprite = getIcon((int)turretsToSelect[1, 0]);
+        button3.GetComponent<Image>().sprite = getIcon((int)turretsToSelect[2, 0]);
+        button4.GetComponent<Image>().sprite = getIcon((int)turretsToSelect[3, 0]);
+        button5.GetComponent<Image>().sprite = getIcon((int)turretsToSelect[4, 0]);
+        button1.GetComponentInChildren<Text>().text = "Test";
+
+    }
+    private Sprite getIcon(int type)
+    {
+        switch (type)
+        {
+            case 1:
+                return icon1;
+            case 2:
+                return icon2;
+            case 3:
+                return icon3;
+            case 4:
+                return icon4;
+            default:
+                return null;
+        }
+
+
     }
 
 

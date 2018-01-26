@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Platform : MonoBehaviour {
 
@@ -20,6 +21,15 @@ public class Platform : MonoBehaviour {
         
     void OnMouseEnter()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+        if (TowerManager.single.getSelectedTurretPrefab() == null)
+        {
+            return;
+        }
+
         r.material.color = mouseOver;
 
     }
@@ -30,6 +40,15 @@ public class Platform : MonoBehaviour {
 
     void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        if (TowerManager.single.getSelectedTurretPrefab() == null)
+        {
+            return;
+        }
         if (turret != null)
         {
             Debug.Log("No Space");
@@ -44,6 +63,7 @@ public class Platform : MonoBehaviour {
         tower.spd = TowerManager.single.getSelectedTurretSpd();
         tower.price = TowerManager.single.getSelectedTurretPrice();
         tower.element = TowerManager.single.getSelectedTurretElement();
+        TowerManager.single.selectTurret(-1);
     }
 
 }
