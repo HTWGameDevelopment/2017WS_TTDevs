@@ -9,6 +9,8 @@ public class towers : MonoBehaviour {
     public float range;
     public float dmg;
     public float spd;
+    public float price;
+    public float element; // 1=fire 2=Wind 3=Ice
 
     [Header("OtherStuff")]
 

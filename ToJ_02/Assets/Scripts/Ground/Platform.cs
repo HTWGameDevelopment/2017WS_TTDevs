@@ -42,6 +42,8 @@ public class Platform : MonoBehaviour {
         tower.range = TowerManager.single.getSelectedTurretRange();
         tower.dmg = TowerManager.single.getSelectedTurretDmg();
         tower.spd = TowerManager.single.getSelectedTurretSpd();
+        tower.price = TowerManager.single.getSelectedTurretPrice();
+        tower.element = TowerManager.single.getSelectedTurretElement();
     }
 
 }

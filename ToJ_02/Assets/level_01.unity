@@ -3889,6 +3889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallSingleTargetPrefab: {fileID: 1097453348291252, guid: 9261e6e7b267a3246a4394410808933e,
     type: 2}
+  selectedTurret: 0
 --- !u!1 &640483746
 GameObject:
   m_ObjectHideFlags: 0
@@ -10003,6 +10004,8 @@ MonoBehaviour:
   range: 18
   dmg: 0
   spd: 0
+  price: 0
+  element: 0
   target: {fileID: 0}
   creepTag: Creep
 --- !u!4 &1727703782 stripped
