@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class towers : MonoBehaviour {
-    private float range = 18f;
+
+    [Header("Attributes")]
+
+    public float range = 18f;
+    public float dmg = 0;
+    public float spd = 0;
+
+    [Header("OtherStuff")]
+
     public Transform target = null;
     public string creepTag = "Creep";
 

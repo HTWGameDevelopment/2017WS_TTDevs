@@ -507,4 +507,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   creepTag: Creep
-  lr: {fileID: 0}
