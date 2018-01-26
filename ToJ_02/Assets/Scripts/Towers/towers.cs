@@ -6,9 +6,9 @@ public class towers : MonoBehaviour {
 
     [Header("Attributes")]
 
-    public float range = 18f;
-    public float dmg = 0;
-    public float spd = 0;
+    public float range;
+    public float dmg;
+    public float spd;
 
     [Header("OtherStuff")]
 

@@ -7,6 +7,7 @@ public class Platform : MonoBehaviour {
     private Renderer r;
     public Color mouseOver;
     private Color old;
+    public Vector3 buildOfSet;
 
 
     private GameObject turret;
@@ -25,6 +26,22 @@ public class Platform : MonoBehaviour {
     void OnMouseExit()
     {
         r.material.color = old;
+    }
+
+    void OnMouseDown()
+    {
+        if (turret != null)
+        {
+            Debug.Log("No Space");
+            return;
+        }
+
+        GameObject selectedTurret = TowerManager.single.getSelectedTurretPrefab();
+        turret = (GameObject)Instantiate(selectedTurret, transform.position + buildOfSet, transform.rotation);
+        towers tower = turret.GetComponent<towers>();
+        tower.range = TowerManager.single.getSelectedTurretRange();
+        tower.dmg = TowerManager.single.getSelectedTurretDmg();
+        tower.spd = TowerManager.single.getSelectedTurretSpd();
     }
 
 }
