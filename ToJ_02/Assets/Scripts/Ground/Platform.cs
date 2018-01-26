@@ -27,15 +27,4 @@ public class Platform : MonoBehaviour {
         r.material.color = old;
     }
 
-    void OnMouseDown()
-    {
-        if (turret != null)
-        {
-            Debug.log("No Space");
-            return;
-        }
-
-
-    }
-
 }
