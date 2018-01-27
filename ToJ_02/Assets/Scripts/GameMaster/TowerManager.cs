@@ -163,8 +163,11 @@ public class TowerManager : MonoBehaviour {
         button3.GetComponent<Image>().sprite = getIcon((int)turretsToSelect[2, 0]);
         button4.GetComponent<Image>().sprite = getIcon((int)turretsToSelect[3, 0]);
         button5.GetComponent<Image>().sprite = getIcon((int)turretsToSelect[4, 0]);
-        button1.GetComponentInChildren<Text>().text = "Test";
-
+        button1.GetComponentInChildren<Text>().text = turretsToSelect[0, 4].ToString();
+        button2.GetComponentInChildren<Text>().text = turretsToSelect[1, 4].ToString();
+        button3.GetComponentInChildren<Text>().text = turretsToSelect[2, 4].ToString();
+        button4.GetComponentInChildren<Text>().text = turretsToSelect[3, 4].ToString();
+        button5.GetComponentInChildren<Text>().text = turretsToSelect[4, 4].ToString();
     }
     private Sprite getIcon(int type)
     {
