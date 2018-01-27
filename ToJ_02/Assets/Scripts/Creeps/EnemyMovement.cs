@@ -31,7 +31,7 @@ public class EnemyMovement : MonoBehaviour {
         if (waypointIndex == Waypoints.points.Length - 1)
         {
             Destroy(gameObject);
-			PlayerStats.reduceHealth (1);
+			PlayerStats.single.reduceHealth (1);
         }
         else
         {

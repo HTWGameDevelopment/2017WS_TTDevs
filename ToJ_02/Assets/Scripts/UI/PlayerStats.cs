@@ -1,14 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour {
 
-	public static int health = 100;
+    public static PlayerStats single;
+    void Awake()
+    {
+        single = this;
+    }
+    public int health = 100;
+    public int money = 100000;
+
+    public Text text;
 
 	// Use this for initialization
 	void Start () {
-		
+        updateMoney(0);
 	}
 	
 	// Update is called once per frame
@@ -17,11 +26,22 @@ public class PlayerStats : MonoBehaviour {
 		
 	}
 
-	public static void reduceHealth(int amount) {
+	public void reduceHealth(int amount) {
 		health = health - amount;
 	}
 
-	public static int getHealth() {
+	public int getHealth() {
 		return health;
 	}
+
+    public int getMoney()
+    {
+        return money;
+    }
+
+    public void updateMoney(int value)
+    {
+        money += value;
+        text.text = money.ToString();
+    }
 }

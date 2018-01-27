@@ -15,7 +15,7 @@ public class showHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		health = PlayerStats.getHealth ();
+		health = PlayerStats.single.getHealth ();
 		healthDisplay = GetComponent<Text> ();
 		healthDisplay.text = "Health left: " + health.ToString();
 		
