@@ -16,10 +16,13 @@ public class towers : MonoBehaviour {
 
     public Transform target = null;
     public string creepTag = "Creep";
+    public GameObject projectile;
+    public Vector3 dir;
 
 	// Use this for initialization
 	void Start () {
         InvokeRepeating("searchTarget", 0f, 0.3f);
+        InvokeRepeating("shoot", 0f, 0.5f);
 
 
 		
@@ -66,6 +69,28 @@ public class towers : MonoBehaviour {
 
 
         }
+    }
+
+    void shoot()
+    {
+        if (target == null)
+        {
+            return;
+        } else
+        {
+            Creeps shootTarget = target.GetComponent<Creeps>();
+            shootTarget.takeDmg(20);
+            
+            Vector3 shootingPoint = transform.position;
+            shootingPoint.y += 5f;
+            GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
+            dir = target.position - shootingPoint;
+            bullet.transform.Translate(dir.normalized * 10f, Space.World);
+            Destroy(bullet, 2f);
+
+
+        }
+
     }
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Creeps : MonoBehaviour
 {
 
-    public static int health = 100;
+    public int health = 100;
     public static float speed = 10f;
     public int creepType = 0;
 
@@ -20,7 +20,11 @@ public class Creeps : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (health == 0)
+        {
+            Destroy(this.gameObject);
+            PlayerStats.single.creepDestroyed();
+        }
     }
 
     public static float getSpeed()
@@ -28,16 +32,20 @@ public class Creeps : MonoBehaviour
         return speed;
     }
 
-    public static int getHealth()
+    public int getHealth()
     {
         return health;
     }
 
 
-    public static void setHealth(int value)
+    public void setHealth(int value)
     {
         health = value;
     }
 
+    public void takeDmg(int value)
+    {
+        health -= value;
+    }
 }
 
