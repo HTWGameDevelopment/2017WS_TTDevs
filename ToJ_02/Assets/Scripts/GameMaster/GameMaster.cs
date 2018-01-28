@@ -5,12 +5,12 @@ using System;
 using System.IO;
 
 public class GameMaster : MonoBehaviour {
-    public Transform sphereCreep;
-    public Transform cubeCreep;
-    public Transform cylinderCreep;
+    public GameObject sphereCreep;
+    public GameObject cubeCreep;
+    public GameObject cylinderCreep;
     public Transform spawnPoint;
 
-
+    private GameObject creep;
 
     // Use this for initialization
     void Start() {
@@ -36,9 +36,13 @@ public class GameMaster : MonoBehaviour {
                 String[] substrings = line.Split(':'); 
                 int type;
                 int amount;
+                int health;
+                int speed;
                 Int32.TryParse(substrings[0], out type);
                 Int32.TryParse(substrings[1], out amount);
-                StartCoroutine(spawnThem(type, amount, 0, 0));
+                Int32.TryParse(substrings[2], out health);
+                Int32.TryParse(substrings[3], out speed);
+                StartCoroutine(spawnThem(type, amount, health, speed));
                 yield return new WaitForSeconds(8f);
 
             }
@@ -67,7 +71,10 @@ public class GameMaster : MonoBehaviour {
             case 0:
                 for (int i = 0; i <= amount; i++)
                 {
-                    Instantiate(sphereCreep, spawnPoint.position, spawnPoint.rotation);
+                    creep = (GameObject)Instantiate(sphereCreep, spawnPoint.position, spawnPoint.rotation);
+                    Creeps stats = creep.GetComponent<Creeps>();
+                    stats.setHealth(health);
+                    stats.setSpeed(speed);
                     yield return new WaitForSeconds(0.5f);
                 }
                 break;
@@ -75,7 +82,9 @@ public class GameMaster : MonoBehaviour {
             case 1:
                 for (int i = 0; i <= amount; i++)
                 {
-                    Instantiate(cubeCreep, spawnPoint.position, spawnPoint.rotation);
+                    creep = Instantiate(cubeCreep, spawnPoint.position, spawnPoint.rotation);
+
+
                     yield return new WaitForSeconds(0.5f);
                 }
                 break;
@@ -83,7 +92,9 @@ public class GameMaster : MonoBehaviour {
             case 2:
                 for (int i = 0; i <= amount; i++)
                 {
-                    Instantiate(cylinderCreep, spawnPoint.position, spawnPoint.rotation);
+                    creep = Instantiate(cylinderCreep, spawnPoint.position, spawnPoint.rotation);
+
+
                     yield return new WaitForSeconds(0.5f);
                 }
                 break;

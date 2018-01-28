@@ -6,7 +6,7 @@ public class Creeps : MonoBehaviour
 {
 
     public int health = 100;
-    public static float speed = 10f;
+    public float speed = 10f;
     public int creepType = 0;
 
 
@@ -20,14 +20,14 @@ public class Creeps : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health == 0)
+        if (health <= 0)
         {
             Destroy(this.gameObject);
             PlayerStats.single.creepDestroyed();
         }
     }
 
-    public static float getSpeed()
+    public float getSpeed()
     {
         return speed;
     }
@@ -35,6 +35,11 @@ public class Creeps : MonoBehaviour
     public int getHealth()
     {
         return health;
+    }
+
+    public void setSpeed(float value)
+    {
+        speed = value;
     }
 
 

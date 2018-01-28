@@ -10,9 +10,9 @@ public class EnemyMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         target = Waypoints.points[waypointIndex];
-		speed = Creeps.getSpeed ();
-		
+        speed = gameObject.GetComponent<Creeps>().getSpeed();
 	}
+    
 	
 	// Update is called once per frame
 	void Update () {
