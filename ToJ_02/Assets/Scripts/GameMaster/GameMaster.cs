@@ -40,14 +40,21 @@ public class GameMaster : MonoBehaviour {
                 int speed;
                 int reward;
                 int waveReward;
+                float fireRes;
+                float windRes;
+                float iceRes;
                 Int32.TryParse(substrings[0], out type);
                 Int32.TryParse(substrings[1], out amount);
                 Int32.TryParse(substrings[2], out health);
                 Int32.TryParse(substrings[3], out speed);
                 Int32.TryParse(substrings[4], out reward);
                 Int32.TryParse(substrings[5], out waveReward);
+                float.TryParse(substrings[6], out fireRes);
+                float.TryParse(substrings[7], out windRes);
+                float.TryParse(substrings[8], out iceRes);
+
                 PlayerStats.single.updateMoney(waveReward);
-                StartCoroutine(spawnThem(type, amount, health, speed,reward));
+                StartCoroutine(spawnThem(type, amount, health, speed,reward,fireRes/100,windRes/100,iceRes/100));
                 yield return new WaitForSeconds(20f);
 
             }
@@ -69,7 +76,7 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    IEnumerator spawnThem(int type, int amount, int health, float speed,int reward)
+    IEnumerator spawnThem(int type, int amount, int health, float speed, int reward, float fireRes, float windRes,float iceRes)
     {
         switch (type)
         {
@@ -80,7 +87,10 @@ public class GameMaster : MonoBehaviour {
                     Creeps stats = creep.GetComponent<Creeps>();
                     stats.setHealth(health);
                     stats.setSpeed(speed);
-                    stats.setValue(reward);
+                    stats.setReward(reward);
+                    stats.setFireRes(fireRes);
+                    stats.setWindRes(windRes);
+                    stats.setIceRes(iceRes);
                     yield return new WaitForSeconds(0.5f);
                 }
                 break;
@@ -92,8 +102,10 @@ public class GameMaster : MonoBehaviour {
                     Creeps stats = creep.GetComponent<Creeps>();
                     stats.setHealth(health);
                     stats.setSpeed(speed);
-                    stats.setValue(reward);
-
+                    stats.setReward(reward);
+                    stats.setFireRes(fireRes);
+                    stats.setWindRes(windRes);
+                    stats.setIceRes(iceRes);
                     yield return new WaitForSeconds(0.5f);
                 }
                 break;
@@ -105,8 +117,10 @@ public class GameMaster : MonoBehaviour {
                     Creeps stats = creep.GetComponent<Creeps>();
                     stats.setHealth(health);
                     stats.setSpeed(speed);
-                    stats.setValue(reward);
-
+                    stats.setReward(reward);
+                    stats.setFireRes(fireRes);
+                    stats.setWindRes(windRes);
+                    stats.setIceRes(iceRes);
                     yield return new WaitForSeconds(0.5f);
                 }
                 break;

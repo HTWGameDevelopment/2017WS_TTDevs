@@ -6,11 +6,12 @@ public class towers : MonoBehaviour {
 
     [Header("Attributes")]
 
+    public int type;
     public float range;
     public float dmg;
     public float spd;
     public float price;
-    public float element; // 1=fire 2=Wind 3=Ice
+    public int element; // 1=fire 2=Wind 3=Ice
 
     [Header("OtherStuff")]
 
@@ -21,8 +22,8 @@ public class towers : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating("searchTarget", 0f, 0.3f);
-        InvokeRepeating("shoot", 0f, 0.5f);
+        InvokeRepeating("searchTarget" + type, 0f, 1/spd);
+//        InvokeRepeating("shoot", 0.1f, 1/spd);
 
 
 		
@@ -43,7 +44,7 @@ public class towers : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    void searchTarget()
+    private void searchTarget1()
     {
         GameObject[] creeps = GameObject.FindGameObjectsWithTag(creepTag);
 		float closestDistance = Mathf.Infinity;
@@ -69,9 +70,10 @@ public class towers : MonoBehaviour {
 
 
         }
+        shoot();
     }
 
-    void shoot()
+    private void shoot()
     {
         if (target == null)
         {
@@ -79,7 +81,7 @@ public class towers : MonoBehaviour {
         } else
         {
             Creeps shootTarget = target.GetComponent<Creeps>();
-            shootTarget.takeDmg(20);
+            shootTarget.checkDmg(dmg,element);
             
             Vector3 shootingPoint = transform.position;
             shootingPoint.y += 5f;

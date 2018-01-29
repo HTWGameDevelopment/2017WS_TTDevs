@@ -64,7 +64,8 @@ public class Platform : MonoBehaviour {
         tower.dmg = towerManager.getSelectedTurretDmg();
         tower.spd = towerManager.getSelectedTurretSpd();
         tower.price = towerManager.getSelectedTurretPrice();
-        tower.element = towerManager.getSelectedTurretElement();
+        tower.element = (int)towerManager.getSelectedTurretElement();
+        tower.type = (int)towerManager.getSelectedTurretType();
         PlayerStats.single.updateMoney(-(int)tower.price);
         towerManager.selectTurret(-1);
     }

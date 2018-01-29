@@ -78,6 +78,10 @@ public class TowerManager : MonoBehaviour {
         }
     }
 
+    public int getSelectedTurretType()
+    {
+        return (int)turretsToSelect[selectedTurret,0];
+    }
 
     public float getSelectedTurretRange()
     {
