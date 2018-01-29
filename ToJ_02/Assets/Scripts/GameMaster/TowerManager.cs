@@ -43,7 +43,7 @@ public class TowerManager : MonoBehaviour {
     public Sprite icon4;
 
     private float[,] turretsToSelect = new float[5,7];//[x,y] x = Turrets 1-5 y0= turretType y1 = turretRange y2 = turretDmg y3 = turretSpd y4 = turret cost y5 = element y6 = active
-    public int selectedTurret;
+    private int selectedTurret = -1;
 
     void Start()
     {

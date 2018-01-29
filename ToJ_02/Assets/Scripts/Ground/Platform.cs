@@ -9,12 +9,14 @@ public class Platform : MonoBehaviour {
     public Color mouseOver;
     private Color old;
     public Vector3 buildOfSet;
+    private TowerManager towerManager;
 
 
     private GameObject turret;
 
     void Start()
     {
+        towerManager = TowerManager.single;
         r = GetComponent<Renderer>();
         old = r.material.color;
     }
@@ -25,7 +27,7 @@ public class Platform : MonoBehaviour {
         {
             return;
         }
-        if (TowerManager.single.getSelectedTurretPrefab() == null)
+        if (towerManager.getSelectedTurretPrefab() == null)
         {
             return;
         }
@@ -45,7 +47,7 @@ public class Platform : MonoBehaviour {
             return;
         }
 
-        if (TowerManager.single.getSelectedTurretPrefab() == null)
+        if (towerManager.getSelectedTurretPrefab() == null)
         {
             return;
         }
@@ -55,15 +57,16 @@ public class Platform : MonoBehaviour {
             return;
         }
 
-        GameObject selectedTurret = TowerManager.single.getSelectedTurretPrefab();
+        GameObject selectedTurret = towerManager.getSelectedTurretPrefab();
         turret = (GameObject)Instantiate(selectedTurret, transform.position + buildOfSet, transform.rotation);
         towers tower = turret.GetComponent<towers>();
-        tower.range = TowerManager.single.getSelectedTurretRange();
-        tower.dmg = TowerManager.single.getSelectedTurretDmg();
-        tower.spd = TowerManager.single.getSelectedTurretSpd();
-        tower.price = TowerManager.single.getSelectedTurretPrice();
-        tower.element = TowerManager.single.getSelectedTurretElement();
-        TowerManager.single.selectTurret(-1);
+        tower.range = towerManager.getSelectedTurretRange();
+        tower.dmg = towerManager.getSelectedTurretDmg();
+        tower.spd = towerManager.getSelectedTurretSpd();
+        tower.price = towerManager.getSelectedTurretPrice();
+        tower.element = towerManager.getSelectedTurretElement();
+        PlayerStats.single.updateMoney(-(int)tower.price);
+        towerManager.selectTurret(-1);
     }
 
 }

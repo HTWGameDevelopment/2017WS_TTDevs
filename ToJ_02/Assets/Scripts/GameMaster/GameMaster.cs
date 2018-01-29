@@ -28,7 +28,7 @@ public class GameMaster : MonoBehaviour {
     {
         using (StreamReader sr = new StreamReader(filename))
         {
-            string line = "";
+            string line = sr.ReadLine();
 
             while (line != null)
             {
@@ -38,12 +38,17 @@ public class GameMaster : MonoBehaviour {
                 int amount;
                 int health;
                 int speed;
+                int reward;
+                int waveReward;
                 Int32.TryParse(substrings[0], out type);
                 Int32.TryParse(substrings[1], out amount);
                 Int32.TryParse(substrings[2], out health);
                 Int32.TryParse(substrings[3], out speed);
-                StartCoroutine(spawnThem(type, amount, health, speed));
-                yield return new WaitForSeconds(8f);
+                Int32.TryParse(substrings[4], out reward);
+                Int32.TryParse(substrings[5], out waveReward);
+                PlayerStats.single.updateMoney(waveReward);
+                StartCoroutine(spawnThem(type, amount, health, speed,reward));
+                yield return new WaitForSeconds(20f);
 
             }
             sr.Close();
@@ -64,27 +69,18 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    IEnumerator spawnThem(int type, int amount, int health, float speed)
+    IEnumerator spawnThem(int type, int amount, int health, float speed,int reward)
     {
         switch (type)
         {
-            case 0:
+            case 1:
                 for (int i = 0; i <= amount; i++)
                 {
                     creep = (GameObject)Instantiate(sphereCreep, spawnPoint.position, spawnPoint.rotation);
                     Creeps stats = creep.GetComponent<Creeps>();
                     stats.setHealth(health);
                     stats.setSpeed(speed);
-                    yield return new WaitForSeconds(0.5f);
-                }
-                break;
-
-            case 1:
-                for (int i = 0; i <= amount; i++)
-                {
-                    creep = Instantiate(cubeCreep, spawnPoint.position, spawnPoint.rotation);
-
-
+                    stats.setValue(reward);
                     yield return new WaitForSeconds(0.5f);
                 }
                 break;
@@ -92,11 +88,29 @@ public class GameMaster : MonoBehaviour {
             case 2:
                 for (int i = 0; i <= amount; i++)
                 {
-                    creep = Instantiate(cylinderCreep, spawnPoint.position, spawnPoint.rotation);
-
+                    creep = (GameObject)Instantiate(cubeCreep, spawnPoint.position, spawnPoint.rotation);
+                    Creeps stats = creep.GetComponent<Creeps>();
+                    stats.setHealth(health);
+                    stats.setSpeed(speed);
+                    stats.setValue(reward);
 
                     yield return new WaitForSeconds(0.5f);
                 }
+                break;
+
+            case 3:
+                for (int i = 0; i <= amount; i++)
+                {
+                    creep = (GameObject)Instantiate(cylinderCreep, spawnPoint.position, spawnPoint.rotation);
+                    Creeps stats = creep.GetComponent<Creeps>();
+                    stats.setHealth(health);
+                    stats.setSpeed(speed);
+                    stats.setValue(reward);
+
+                    yield return new WaitForSeconds(0.5f);
+                }
+                break;
+            default:
                 break;
         }
     }

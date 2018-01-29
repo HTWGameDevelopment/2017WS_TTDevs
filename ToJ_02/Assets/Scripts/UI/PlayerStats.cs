@@ -11,8 +11,8 @@ public class PlayerStats : MonoBehaviour {
         single = this;
     }
     public int health = 100;
-    public int money = 100000;
-    public int destroyedCreeps = 0;
+    private int money = 0;
+    private int destroyedCreeps = 0;
 
     public Text text;
 
@@ -38,6 +38,16 @@ public class PlayerStats : MonoBehaviour {
     public int getMoney()
     {
         return money;
+    }
+
+    public bool enoughMoney(int price)
+    {
+        if (money - price < 0)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void updateMoney(int value)

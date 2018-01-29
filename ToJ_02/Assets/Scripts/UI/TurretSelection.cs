@@ -5,39 +5,70 @@ using UnityEngine.EventSystems;
 
 public class TurretSelection : MonoBehaviour,IPointerDownHandler {
 
-
+    private TowerManager towerManager;
+    private PlayerStats playerStats;
     void Start()
     {
-
+        playerStats = PlayerStats.single;
+        towerManager = TowerManager.single;
     }
     public void SelectTurretOne()
     {
-        TowerManager.single.selectTurret(0);
+        towerManager.selectTurret(0);
+        if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
+        {
+            towerManager.selectTurret(-1);
+            Debug.Log("No Money");
+        }
+        
     }
 
     public void SelectTurretTwo()
     {
-        TowerManager.single.selectTurret(1);
+        towerManager.selectTurret(1);
+        if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
+        {
+            towerManager.selectTurret(-1);
+            Debug.Log("No Money");
+        }
+
     }
 
     public void SelectTurretThree()
     {
-        TowerManager.single.selectTurret(2);
-    }
+        towerManager.selectTurret(2);
+        if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
+        {
+            towerManager.selectTurret(-1);
+            Debug.Log("No Money");
+        }
 
+    }
     public void SelectTurretFour()
     {
-        TowerManager.single.selectTurret(3);
+        towerManager.selectTurret(3);
+        if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
+        {
+            towerManager.selectTurret(-1);
+            Debug.Log("No Money");
+        }
+
     }
 
     public void SelectTurretFive()
     {
-        TowerManager.single.selectTurret(4);
+        towerManager.selectTurret(4);
+        if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
+        {
+            towerManager.selectTurret(-1);
+            Debug.Log("No Money");
+        }
+
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        TowerManager.single.selectTurret(-1);
+        towerManager.selectTurret(-1);
     }
 
 

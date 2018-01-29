@@ -5,9 +5,10 @@ using UnityEngine;
 public class Creeps : MonoBehaviour
 {
 
-    public int health = 100;
-    public float speed = 10f;
-    public int creepType = 0;
+    public int health;
+    public float speed;
+    public int creepType;
+    public int reward;
 
 
 
@@ -22,8 +23,9 @@ public class Creeps : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(this.gameObject);
+            PlayerStats.single.updateMoney(reward);
             PlayerStats.single.creepDestroyed();
+            Destroy(gameObject);
         }
     }
 
@@ -35,6 +37,16 @@ public class Creeps : MonoBehaviour
     public int getHealth()
     {
         return health;
+    }
+
+    public int getReward()
+    {
+        return reward;
+    }
+
+    public void setValue(int value)
+    {
+        reward = value;
     }
 
     public void setSpeed(float value)

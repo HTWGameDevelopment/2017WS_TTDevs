@@ -3907,7 +3907,6 @@ MonoBehaviour:
   icon2: {fileID: 0}
   icon3: {fileID: 0}
   icon4: {fileID: 0}
-  selectedTurret: -1
 --- !u!1 &640483746
 GameObject:
   m_ObjectHideFlags: 0
@@ -4278,7 +4277,7 @@ GameObject:
   - component: {fileID: 680964831}
   - component: {fileID: 680964830}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5420,6 +5419,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1079623896}
+    - target: {fileID: 114202286264303306, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectTurretOne
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b0487b3ba8ee5e43b37c2c2ee821518, type: 2}
   m_IsPrefabParent: 0
@@ -7559,7 +7563,7 @@ GameObject:
   - component: {fileID: 1217632029}
   - component: {fileID: 1217632028}
   m_Layer: 5
-  m_Name: Stats
+  m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10695,7 +10699,7 @@ GameObject:
   - component: {fileID: 1724504847}
   - component: {fileID: 1724504851}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10790,8 +10794,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  money: 100000
-  destroyedCreeps: 0
   text: {fileID: 706188823}
 --- !u!4 &1727703782 stripped
 Transform:
