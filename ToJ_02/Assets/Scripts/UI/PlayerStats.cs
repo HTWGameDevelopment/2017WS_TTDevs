@@ -53,7 +53,7 @@ public class PlayerStats : MonoBehaviour {
     public void updateMoney(int value)
     {
         money += value;
-        text.text = money.ToString();
+        text.text = "Cash: " + money.ToString();
     }
 
     public void creepDestroyed()

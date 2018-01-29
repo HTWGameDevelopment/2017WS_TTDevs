@@ -120,4 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bbfb20f64dc54443b7a2eedbb2293af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creepType: 0
+  health: 100
+  speed: 10
+  creepType: 2
+  reward: 20

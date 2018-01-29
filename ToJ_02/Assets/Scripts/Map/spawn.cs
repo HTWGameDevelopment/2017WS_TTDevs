@@ -13,7 +13,7 @@ public class Spawn : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        print("first wave in 5 seconds!");
+ //       print("first wave in 5 seconds!");
 
 
     }
@@ -33,20 +33,20 @@ public class Spawn : MonoBehaviour
 
     }
 
-    IEnumerator spawnCreeps()
-    {
+ //   IEnumerator spawnCreeps()
+ //   {
+//
+  //      for (int i = 0; i <= 10; i++)
+ //       {
+ //           spawnCreep();
+ //           yield return new WaitForSeconds(0.3f);
+ //           
 
-        for (int i = 0; i <= 10; i++)
-        {
-            spawnCreep();
-            yield return new WaitForSeconds(0.3f);
-            
+ //     }
+ //   }
 
-        }
-    }
-
-    void spawnCreep()
-    {
-        Instantiate(sphereCreep, spawnPoint.position, spawnPoint.rotation);
-    }
+ //   void spawnCreep()
+ //   {
+ //       Instantiate(sphereCreep, spawnPoint.position, spawnPoint.rotation);
+ //   }
 }
