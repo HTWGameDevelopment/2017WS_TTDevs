@@ -26,6 +26,18 @@ public class EnemyMovement : MonoBehaviour {
 		
 	}
 
+    public int getWaypointIndex()
+    {
+        return waypointIndex;
+    }
+
+    public float getDistancetoNextWaypoint()
+    {
+        float distancetoNextWaypoint = Vector3.Distance(transform.position, target.position);
+        return distancetoNextWaypoint;
+
+    }
+
     void getNextWaypoint()
     {
         if (waypointIndex == Waypoints.points.Length - 1)

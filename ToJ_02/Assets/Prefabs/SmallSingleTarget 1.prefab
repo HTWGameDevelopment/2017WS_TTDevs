@@ -505,11 +505,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d22f3c34af853428c54ea3d5de1c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 0
-  dmg: 0
-  spd: 0
-  price: 0
-  element: 0
-  target: {fileID: 0}
+  type: 1
+  range: 10
+  dmg: 10
+  spd: 1
+  price: 300
+  element: 1
+  focus: 2
   creepTag: Creep
   projectile: {fileID: 1284016506888784, guid: b772eca3940d1334f8fe23a8f7513dc4, type: 2}
+  dir: {x: 0, y: 0, z: 0}
+  lockTarget: {fileID: 0}
