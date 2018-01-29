@@ -42,7 +42,9 @@ public class TowerManager : MonoBehaviour {
     public Sprite icon3;
     public Sprite icon4;
 
-    private float[,] turretsToSelect = new float[5,7];//[x,y] x = Turrets 1-5 y0= turretType y1 = turretRange y2 = turretDmg y3 = turretSpd y4 = turret cost y5 = element y6 = active
+    public Text turretStats;
+
+    private float[,] turretsToSelect = new float[5,7];//[x,y] x=Turrets1-5   y0=turretType    y1=turretRange    y2=turretDmg    y3=turretSpd    y4=turretCost    y5=element    y6=active
     private int selectedTurret = -1;
 
     void Start()
@@ -54,6 +56,46 @@ public class TowerManager : MonoBehaviour {
     public void selectTurret(int number)
     {
         selectedTurret = number;
+        showTurretInfo();
+    }
+
+    private void showTurretInfo()
+    {
+        StartCoroutine(Wait(0.3f));
+        if (selectedTurret == -1)
+        {
+            turretStats.text = "";
+        }
+        else
+        {
+            turretStats.text = "Price: " + turretsToSelect[selectedTurret,4].ToString() +
+                               "\nElement: " + getElement((int)turretsToSelect[selectedTurret, 5]) +
+                               "\nDamage: " + turretsToSelect[selectedTurret, 2].ToString() +
+                               "\nRange: " + turretsToSelect[selectedTurret, 1].ToString() +
+                               "\nAttack Speed: " + turretsToSelect[selectedTurret, 3].ToString();
+        }
+
+
+    }
+
+    private IEnumerator Wait(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+    }
+
+    private string getElement(int type)
+    {
+        switch (type)
+        {
+            case 1:
+                return "fire";
+            case 2:
+                return "wind";
+            case 3:
+                return "ice";
+            default:
+                return "not yet Implemented";
+        }
     }
 
     public GameObject getSelectedTurretPrefab()

@@ -14,7 +14,7 @@ public class PlayerStats : MonoBehaviour {
     private int money = 0;
     private int destroyedCreeps = 0;
 
-    public Text text;
+    public Text cash;
 
 	// Use this for initialization
 	void Start () {
@@ -53,7 +53,7 @@ public class PlayerStats : MonoBehaviour {
     public void updateMoney(int value)
     {
         money += value;
-        text.text = "Cash: " + money.ToString();
+        cash.text = "\n Cash: " + money.ToString();
     }
 
     public void creepDestroyed()

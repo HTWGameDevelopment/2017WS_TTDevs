@@ -10,13 +10,13 @@ public class EnemyMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         target = Waypoints.points[waypointIndex];
-        speed = gameObject.GetComponent<Creeps>().getSpeed();
 	}
     
 	
 	// Update is called once per frame
 	void Update () {
         Vector3 dir = target.position - transform.position;
+        speed = gameObject.GetComponent<Creeps>().getSpeed();
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
 
         if (Vector3.Distance(transform.position, target.position) <= 0.4f)

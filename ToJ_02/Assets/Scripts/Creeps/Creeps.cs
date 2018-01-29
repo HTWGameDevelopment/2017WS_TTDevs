@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Creeps : MonoBehaviour
 {
-
+    public static float SLOWDURATION = 5.0f;
+    public static float WEAKENDURATION = 10.0f;
     public float health;
     public float speed;
     public int creepType;
@@ -13,6 +14,13 @@ public class Creeps : MonoBehaviour
     public float windRes;
     public float iceRes;
 
+
+    public bool slowed = false;
+    private Coroutine sCoroutine = null;
+    private float weakenDuration = 0.0f;
+    public bool weakened = false;
+    private float slowDuration = 0.0f;
+    private Coroutine wCoroutine = null;
 
 
 
@@ -50,7 +58,12 @@ public class Creeps : MonoBehaviour
 
     public float getSpeed()
     {
-        return speed;
+        float realSpeed = speed;
+        if (slowed)
+        {
+            realSpeed /= (2.0f - iceRes);
+        }
+        return realSpeed;
     }
 
     public float getHealth()
@@ -100,40 +113,78 @@ public class Creeps : MonoBehaviour
         switch (dmgType)
         {
             case 1:
-                if (fireRes>=1)
+                if (fireRes >= 1.0f)
                 {
-                    takeDmg(0);
+                    takeDmg(0.0f);
                 }
+                else
+                {
 
-                if (fireRes<=0)
-                {
-                    takeDmg(dmg);
+                    if (fireRes <= 0.0f)
+                    {
+                        takeDmg(dmg);
+                    }
+                    else
+                    {
+                        takeDmg(dmg * (1.0f - fireRes));
+                    }
                 }
-                takeDmg(dmg*(1-fireRes));
                 break;
             case 2:
-                if (windRes >= 1)
+                if (windRes >= 1.0f)
                 {
-                    takeDmg(0);
+                    takeDmg(0.0f);
                 }
+                else
+                {
 
-                if (windRes <= 0)
-                {
-                    takeDmg(dmg);
+                    if (windRes <= 0.0f)
+                    {
+                        takeDmg(dmg);
+                        weakenDuration = WEAKENDURATION;
+                        if (wCoroutine == null)
+                        {
+                            wCoroutine = StartCoroutine(Weak());
+                        }
+                    }
+                    else
+                    {
+                        takeDmg(dmg * (1.0f - windRes));
+                        weakenDuration = WEAKENDURATION * (1.0f - windRes);
+                        if (wCoroutine == null)
+                        {
+                            wCoroutine = StartCoroutine(Weak());
+                        }
+                    }
                 }
-                takeDmg(dmg * (1 - windRes));
                 break;
             case 3:
                 if (iceRes >= 1)
                 {
                     takeDmg(0);
                 }
-
-                if (iceRes <= 0)
+                else
                 {
-                    takeDmg(dmg);
+
+                    if (iceRes <= 0)
+                    {
+                        takeDmg(dmg);
+                        slowDuration = SLOWDURATION;
+                        if (sCoroutine == null)
+                        {
+                            sCoroutine = StartCoroutine(Slow());
+                        }
+                    }
+                    else
+                    {
+                        takeDmg(dmg * (1.0f - iceRes));
+                        slowDuration = SLOWDURATION * (1.0f - iceRes);
+                        if (sCoroutine == null)
+                        {
+                            sCoroutine = StartCoroutine(Slow());
+                        }
+                    }
                 }
-                takeDmg(dmg * (1 - iceRes));
                 break;
             default:
                 takeDmg(dmg);
@@ -145,8 +196,38 @@ public class Creeps : MonoBehaviour
 
     }
 
-    public void takeDmg(float value)
+    private IEnumerator Slow()
     {
+        slowed = true;
+        while (slowDuration > 0)
+        {
+            slowDuration -= Time.deltaTime;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+        slowed = false;
+        sCoroutine = null;
+    }
+
+    private IEnumerator Weak()
+    {
+        weakened = true;
+        while (weakenDuration > 0)
+        {
+            weakenDuration -= Time.deltaTime;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+        weakened = false;
+        wCoroutine = null;
+    }
+
+    private void takeDmg(float value)
+    {
+        if (weakened)
+        {
+           value *= (2.0f - windRes);
+        }
         health -= value;
         Debug.Log("Health: " + health + "    Dmg: " + value);
     }

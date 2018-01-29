@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class towers : MonoBehaviour {
 
@@ -15,13 +16,14 @@ public class towers : MonoBehaviour {
 
     [Header("OtherStuff")]
 
-    public Transform target = null;
     public string creepTag = "Creep";
     public GameObject projectile;
     public Vector3 dir;
+    public GameObject lockTarget = null;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         InvokeRepeating("searchTarget" + type, 0f, 1/spd);
 //        InvokeRepeating("shoot", 0.1f, 1/spd);
 
@@ -30,11 +32,8 @@ public class towers : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        if (target == null)
-        {
-            return;
-        }
+	void Update ()
+    {
 
     }
 
@@ -44,8 +43,9 @@ public class towers : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    private void searchTarget1()
+    private void searchTarget(Action<GameObject> myMethod)
     {
+        GameObject target = null;
         GameObject[] creeps = GameObject.FindGameObjectsWithTag(creepTag);
 		float closestDistance = Mathf.Infinity;
         GameObject closestCreep = null;
@@ -61,8 +61,7 @@ public class towers : MonoBehaviour {
 
             if (closestCreep != null && closestDistance <= range)
             {
-                target = closestCreep.transform;
-                
+                target = closestCreep;
             } else
             {
                 target = null;
@@ -70,10 +69,43 @@ public class towers : MonoBehaviour {
 
 
         }
-        shoot();
+        lockTarget = target;
+        myMethod(target);
     }
 
-    private void shoot()
+    private void searchTarget1()
+    {
+        searchTarget(shoot1);
+    }
+
+    private void searchTarget2()
+    {
+        searchTarget(shoot2);
+    }
+
+    private void searchTarget3()
+    {
+        searchTarget(shoot3);
+    }
+
+    private void searchTarget4()
+    {
+        GameObject target = null;
+        GameObject[] creeps = GameObject.FindGameObjectsWithTag(creepTag);
+
+        foreach (GameObject creep in creeps)
+        {
+            float distanceToCreep = Vector3.Distance(transform.position, creep.transform.position);
+            if (distanceToCreep <= range)
+            {
+                target = creep;
+                shoot4(target);
+            }
+
+        }
+    }
+
+    private void shoot1(GameObject target)
     {
         if (target == null)
         {
@@ -82,16 +114,33 @@ public class towers : MonoBehaviour {
         {
             Creeps shootTarget = target.GetComponent<Creeps>();
             shootTarget.checkDmg(dmg,element);
-            
+
             Vector3 shootingPoint = transform.position;
             shootingPoint.y += 5f;
             GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
-            dir = target.position - shootingPoint;
+            dir = target.transform.position - shootingPoint;
             bullet.transform.Translate(dir.normalized * 10f, Space.World);
             Destroy(bullet, 2f);
 
 
         }
+
+    }
+
+    private void shoot2(GameObject target)
+    {
+
+    }
+
+    private void shoot3(GameObject target)
+    {
+
+    }
+
+    private void shoot4(GameObject target)
+    {
+        Creeps shootTarget = target.GetComponent<Creeps>();
+        shootTarget.checkDmg(dmg, element);
 
     }
 
