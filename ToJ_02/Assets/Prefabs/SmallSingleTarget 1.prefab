@@ -511,7 +511,7 @@ MonoBehaviour:
   spd: 1
   price: 300
   element: 1
-  focus: 2
+  focus: 3
   creepTag: Creep
   projectile: {fileID: 1284016506888784, guid: b772eca3940d1334f8fe23a8f7513dc4, type: 2}
   dir: {x: 0, y: 0, z: 0}

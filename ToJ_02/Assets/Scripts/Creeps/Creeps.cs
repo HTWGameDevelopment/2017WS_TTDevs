@@ -144,7 +144,12 @@ public class Creeps : MonoBehaviour
                         weakenDuration = WEAKENDURATION;
                         if (wCoroutine == null)
                         {
-                            wCoroutine = StartCoroutine(Weak());
+                            wCoroutine = StartCoroutine(Weak(weakenDuration));
+                        }
+                        else
+                        {
+                            StopCoroutine(wCoroutine);
+                            wCoroutine = StartCoroutine(Weak(weakenDuration));
                         }
                     }
                     else
@@ -153,7 +158,12 @@ public class Creeps : MonoBehaviour
                         weakenDuration = WEAKENDURATION * (1.0f - windRes);
                         if (wCoroutine == null)
                         {
-                            wCoroutine = StartCoroutine(Weak());
+                            wCoroutine = StartCoroutine(Weak(weakenDuration));
+                        }
+                        else
+                        {
+                            StopCoroutine(wCoroutine);
+                            wCoroutine = StartCoroutine(Weak(weakenDuration));
                         }
                     }
                 }
@@ -172,7 +182,12 @@ public class Creeps : MonoBehaviour
                         slowDuration = SLOWDURATION;
                         if (sCoroutine == null)
                         {
-                            sCoroutine = StartCoroutine(Slow());
+                            sCoroutine = StartCoroutine(Slow(slowDuration));
+                        }
+                        else
+                        {
+                            StopCoroutine(sCoroutine);
+                            sCoroutine = StartCoroutine(Slow(slowDuration));
                         }
                     }
                     else
@@ -181,7 +196,12 @@ public class Creeps : MonoBehaviour
                         slowDuration = SLOWDURATION * (1.0f - iceRes);
                         if (sCoroutine == null)
                         {
-                            sCoroutine = StartCoroutine(Slow());
+                            sCoroutine = StartCoroutine(Slow(slowDuration));
+                        }
+                        else
+                        {
+                            StopCoroutine(sCoroutine);
+                            sCoroutine = StartCoroutine(Slow(slowDuration));
                         }
                     }
                 }
@@ -196,28 +216,22 @@ public class Creeps : MonoBehaviour
 
     }
 
-    private IEnumerator Slow()
+    private IEnumerator Slow(float time)
     {
         slowed = true;
-        while (slowDuration > 0)
-        {
-            slowDuration -= Time.deltaTime;
-
-            yield return new WaitForSeconds(0.5f);
-        }
+        Debug.Log("slowed");
+        yield return new WaitForSeconds(time);
+        Debug.Log("not slowed");
         slowed = false;
         sCoroutine = null;
     }
 
-    private IEnumerator Weak()
+    private IEnumerator Weak(float time)
     {
         weakened = true;
-        while (weakenDuration > 0)
-        {
-            weakenDuration -= Time.deltaTime;
-
-            yield return new WaitForSeconds(0.5f);
-        }
+        Debug.Log("weakened");
+        yield return new WaitForSeconds(time);
+        Debug.Log("not weakened");
         weakened = false;
         wCoroutine = null;
     }

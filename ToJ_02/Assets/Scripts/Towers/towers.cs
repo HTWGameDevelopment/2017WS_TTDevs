@@ -50,61 +50,131 @@ public class towers : MonoBehaviour {
         GameObject[] creeps = GameObject.FindGameObjectsWithTag(creepTag);
 		float closestDistance = Mathf.Infinity;
         GameObject closestCreep = null;
-        if (focus == 1)
+        switch (focus)
         {
-            foreach (GameObject creep in creeps)
-            {
-                float distanceToCreep = Vector3.Distance(transform.position, creep.transform.position);
-                if (distanceToCreep < closestDistance)
+            case 1:
                 {
-                    closestDistance = distanceToCreep;
-                    closestCreep = creep;
-                }
+                    foreach (GameObject creep in creeps)
+                    {
+                        float distanceToCreep = Vector3.Distance(transform.position, creep.transform.position);
+                        if (distanceToCreep < closestDistance)
+                        {
+                            closestDistance = distanceToCreep;
+                            closestCreep = creep;
+                        }
 
-                if (closestCreep != null && closestDistance <= range)
+                        if (closestCreep != null && closestDistance <= range)
+                        {
+                            target = closestCreep;
+                        }
+                        else
+                        {
+                            target = null;
+                        }
+
+                    }
+                    break;
+                }
+            case 2:
                 {
+
+                    GameObject[] creepsInRange = new GameObject[creeps.Length];
+                    int i = 0;
+                    foreach (GameObject creep in creeps)
+                    {
+                        float distanceToCreep = Vector3.Distance(transform.position, creep.transform.position);
+                        if (distanceToCreep <= range)
+                        {
+                            creepsInRange[i] = creep;
+                            i++;
+                        }
+                    }
+                    int highestWaypoint = -1;
+                    float distancetoFurthestWaypoint = Mathf.Infinity;
+                    foreach (GameObject inRange in creepsInRange)
+                    {
+                        if (inRange == null && closestCreep == null)
+                        {
+                            target = null;
+                        }
+                        else
+                        {
+                            if (inRange == null)
+                            {
+                                target = closestCreep;
+                            }
+                            else
+                            {
+                                if (inRange.GetComponent<EnemyMovement>().getWaypointIndex() >= highestWaypoint)
+                                {
+                                    if (inRange.GetComponent<EnemyMovement>().getWaypointIndex() > highestWaypoint)
+                                    {
+                                        highestWaypoint = inRange.GetComponent<EnemyMovement>().getWaypointIndex();
+                                        distancetoFurthestWaypoint = Mathf.Infinity;
+                                    }
+                                    if (distancetoFurthestWaypoint > inRange.GetComponent<EnemyMovement>().getDistancetoNextWaypoint())
+                                    {
+                                        distancetoFurthestWaypoint = inRange.GetComponent<EnemyMovement>().getDistancetoNextWaypoint();
+                                        closestCreep = inRange;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     target = closestCreep;
+                    break;
                 }
-                else
+            case 3:
+                { 
+                GameObject[] creepsInRange = new GameObject[creeps.Length];
+                int i = 0;
+                foreach (GameObject creep in creeps)
                 {
-                    target = null;
-                }
-
-
-            }
-        }
-        else
-        {
-            GameObject[] creepsInRange = new GameObject[creeps.Length];
-            int i = 0;
-            foreach (GameObject creep in creeps)
-            {
-                float distanceToCreep = Vector3.Distance(transform.position, creep.transform.position);
-                if (distanceToCreep <= range)
-                {
-                    creepsInRange[i] = creep;
-                    i++;
-                }
-            }
-            int highestWaypoint = -1;
-            float distancetoFurthestWaypoint = Mathf.Infinity;
-            foreach (GameObject inRange in creepsInRange)
-            {
-                if (inRange.GetComponent<EnemyMovement>().getWaypointIndex() >= highestWaypoint)
-                {
-                    if (inRange.GetComponent<EnemyMovement>().getWaypointIndex() > highestWaypoint)
+                    float distanceToCreep = Vector3.Distance(transform.position, creep.transform.position);
+                    if (distanceToCreep <= range)
                     {
-                        highestWaypoint = inRange.GetComponent<EnemyMovement>().getWaypointIndex();
-                        distancetoFurthestWaypoint = Mathf.Infinity;
-                    }
-                    if (distancetoFurthestWaypoint > inRange.GetComponent<EnemyMovement>().getDistancetoNextWaypoint())
-                    {
-                        distancetoFurthestWaypoint = inRange.GetComponent<EnemyMovement>().getDistancetoNextWaypoint();
-                        closestCreep = inRange;
+                        creepsInRange[i] = creep;
+                        i++;
                     }
                 }
-            }
-            target = closestCreep;
+                int highestWaypoint = int.MaxValue;
+                float distancetoNextWaypoint = 0;
+                foreach (GameObject inRange in creepsInRange)
+                {
+                    if (inRange == null && closestCreep == null)
+                    {
+                        target = null;
+                    }
+                    else
+                    {
+                        if (inRange == null)
+                        {
+                            target = closestCreep;
+                        }
+                        else
+                        {
+                            if (inRange.GetComponent<EnemyMovement>().getWaypointIndex() <= highestWaypoint)
+                            {
+                                if (inRange.GetComponent<EnemyMovement>().getWaypointIndex() < highestWaypoint)
+                                {
+                                    highestWaypoint = inRange.GetComponent<EnemyMovement>().getWaypointIndex();
+                                    distancetoNextWaypoint = 0;
+                                }
+                                if (distancetoNextWaypoint < inRange.GetComponent<EnemyMovement>().getDistancetoNextWaypoint())
+                                {
+                                    distancetoNextWaypoint = inRange.GetComponent<EnemyMovement>().getDistancetoNextWaypoint();
+                                    closestCreep = inRange;
+                                }
+                            }
+                        }
+                    }
+                }
+                target = closestCreep;
+                break;
+                }
+            default:
+                target = null;
+                break;
         }
         lockTarget = target;
         myMethod(target);

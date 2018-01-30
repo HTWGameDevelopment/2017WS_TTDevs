@@ -81,7 +81,7 @@ public class GameMaster : MonoBehaviour {
         switch (type)
         {
             case 1:
-                for (int i = 0; i <= amount; i++)
+                for (int i = 0; i < amount; i++)
                 {
                     creep = (GameObject)Instantiate(sphereCreep, spawnPoint.position, spawnPoint.rotation);
                     Creeps stats = creep.GetComponent<Creeps>();
@@ -96,7 +96,7 @@ public class GameMaster : MonoBehaviour {
                 break;
 
             case 2:
-                for (int i = 0; i <= amount; i++)
+                for (int i = 0; i < amount; i++)
                 {
                     creep = (GameObject)Instantiate(cubeCreep, spawnPoint.position, spawnPoint.rotation);
                     Creeps stats = creep.GetComponent<Creeps>();
@@ -111,7 +111,7 @@ public class GameMaster : MonoBehaviour {
                 break;
 
             case 3:
-                for (int i = 0; i <= amount; i++)
+                for (int i = 0; i < amount; i++)
                 {
                     creep = (GameObject)Instantiate(cylinderCreep, spawnPoint.position, spawnPoint.rotation);
                     Creeps stats = creep.GetComponent<Creeps>();
