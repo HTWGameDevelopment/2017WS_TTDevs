@@ -13,7 +13,7 @@ public class TowerManager : MonoBehaviour {
     }
     public static float BASECOST = 100;
     public static float GENERATORCOST = 50;
-    public static float RANGECOST = 25;
+    public static float RANGECOST = 30;
     public static float DMGCOST = 10;
     public static float SPDCOST = 20;
     public static float RANGEENERGIE = 25;
@@ -56,12 +56,12 @@ public class TowerManager : MonoBehaviour {
     public void selectTurret(int number)
     {
         selectedTurret = number;
+        Upgrade.single.deselect();
         showTurretInfo();
     }
 
     private void showTurretInfo()
     {
-        StartCoroutine(Wait(0.3f));
         if (selectedTurret == -1)
         {
             turretStats.text = "";
@@ -77,11 +77,11 @@ public class TowerManager : MonoBehaviour {
 
 
     }
-
-    private IEnumerator Wait(float seconds)
+    public void deselect()
     {
-        yield return new WaitForSeconds(seconds);
+        selectedTurret = -1;
     }
+
 
     private string getElement(int type)
     {

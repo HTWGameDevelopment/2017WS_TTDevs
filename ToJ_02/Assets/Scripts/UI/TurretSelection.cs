@@ -17,10 +17,11 @@ public class TurretSelection : MonoBehaviour,IPointerDownHandler {
         towerManager.selectTurret(0);
         if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
         {
-            towerManager.selectTurret(-1);
+            towerManager.deselect();
             Debug.Log("No Money");
         }
         
+
     }
 
     public void SelectTurretTwo()
@@ -28,9 +29,10 @@ public class TurretSelection : MonoBehaviour,IPointerDownHandler {
         towerManager.selectTurret(1);
         if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
         {
-            towerManager.selectTurret(-1);
+            towerManager.deselect();
             Debug.Log("No Money");
         }
+        
 
     }
 
@@ -39,9 +41,10 @@ public class TurretSelection : MonoBehaviour,IPointerDownHandler {
         towerManager.selectTurret(2);
         if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
         {
-            towerManager.selectTurret(-1);
+            towerManager.deselect();
             Debug.Log("No Money");
         }
+        
 
     }
     public void SelectTurretFour()
@@ -49,9 +52,10 @@ public class TurretSelection : MonoBehaviour,IPointerDownHandler {
         towerManager.selectTurret(3);
         if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
         {
-            towerManager.selectTurret(-1);
+            towerManager.deselect();
             Debug.Log("No Money");
         }
+        
 
     }
 
@@ -60,9 +64,11 @@ public class TurretSelection : MonoBehaviour,IPointerDownHandler {
         towerManager.selectTurret(4);
         if (!(playerStats.enoughMoney((int)towerManager.getSelectedTurretPrice())))
         {
-            towerManager.selectTurret(-1);
+            towerManager.deselect();
             Debug.Log("No Money");
         }
+        
+
 
     }
 

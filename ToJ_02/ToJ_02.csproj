@@ -289,11 +289,13 @@
     <Compile Include="Assets\Scripts\GameMaster\Waypoints.cs" />
     <Compile Include="Assets\Scripts\Map\Platform.cs" />
     <Compile Include="Assets\Scripts\Map\spawn.cs" />
+    <Compile Include="Assets\Scripts\Towers\Explode.cs" />
     <Compile Include="Assets\Scripts\Towers\towers.cs" />
     <Compile Include="Assets\Scripts\UI\MainCameraController.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\UI\showHealth.cs" />
     <Compile Include="Assets\Scripts\UI\TurretSelection.cs" />
+    <Compile Include="Assets\Scripts\UI\Upgrade.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

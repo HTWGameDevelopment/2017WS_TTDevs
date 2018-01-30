@@ -5,6 +5,9 @@ using System;
 
 public class towers : MonoBehaviour {
 
+
+    public static float TYPE2EXPLOSIONRANGE = 7.0f;
+    public static float TYPE3EXPLOSIONRANGE = 12.0f;
     [Header("Attributes")]
 
     public int type;
@@ -38,6 +41,47 @@ public class towers : MonoBehaviour {
 
     }
 
+    public void upgrade()
+    {
+        dmg *= 1.1f;
+        price *= 1.1f;
+    }
+
+    public void setFocus(int value)
+    {
+        focus = value;
+    }
+
+    public float getPrice()
+    {
+        return price;
+    }
+
+    public int getFocus()
+    {
+        return focus;
+    }
+
+    public int getElement()
+    {
+        return element;
+    }
+
+    public float getDmg()
+    {
+        return dmg;
+    }
+
+    public float getRange()
+    {
+        return range;
+    }
+
+    public float getSpd()
+    {
+        return spd;
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -48,12 +92,12 @@ public class towers : MonoBehaviour {
     {
         GameObject target = null;
         GameObject[] creeps = GameObject.FindGameObjectsWithTag(creepTag);
-		float closestDistance = Mathf.Infinity;
         GameObject closestCreep = null;
         switch (focus)
         {
             case 1:
                 {
+                    float closestDistance = Mathf.Infinity;
                     foreach (GameObject creep in creeps)
                     {
                         float distanceToCreep = Vector3.Distance(transform.position, creep.transform.position);
@@ -236,19 +280,53 @@ public class towers : MonoBehaviour {
 
     private void shoot2(GameObject target)
     {
+        if (target == null)
+        {
+            return;
+        }
+        else
+        {
 
+            Vector3 shootingPoint = transform.position;
+            shootingPoint.y += 5f;
+            GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
+            dir = target.transform.position - shootingPoint;
+            bullet.transform.Translate(dir.normalized * 10f, Space.World);
+            bullet.GetComponent<Explode>().explode(dmg,element,TYPE2EXPLOSIONRANGE);
+
+        }
     }
 
     private void shoot3(GameObject target)
     {
+        if (target == null)
+        {
+            return;
+        }
+        else
+        {
 
+            Vector3 shootingPoint = transform.position;
+            shootingPoint.y += 5f;
+            GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
+            dir = target.transform.position - shootingPoint;
+            bullet.transform.Translate(dir.normalized * 10f, Space.World);
+            bullet.GetComponent<Explode>().explode(dmg, element, TYPE3EXPLOSIONRANGE);
+
+        }
     }
 
     private void shoot4(GameObject target)
     {
-        Creeps shootTarget = target.GetComponent<Creeps>();
-        shootTarget.checkDmg(dmg, element);
-
+        if (target == null)
+        {
+            return;
+        }
+        else
+        {
+            Creeps shootTarget = target.GetComponent<Creeps>();
+            shootTarget.checkDmg(dmg, element);
+        }
     }
 
 

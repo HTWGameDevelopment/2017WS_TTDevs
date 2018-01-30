@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class Platform : MonoBehaviour {
 
-    private Renderer r;
     public Color mouseOver;
+    private Upgrade upgrade;
+    private Renderer r;
     private Color old;
     public Vector3 buildOfSet;
     private TowerManager towerManager;
@@ -16,6 +18,7 @@ public class Platform : MonoBehaviour {
 
     void Start()
     {
+        upgrade = Upgrade.single;
         towerManager = TowerManager.single;
         r = GetComponent<Renderer>();
         old = r.material.color;
@@ -47,13 +50,15 @@ public class Platform : MonoBehaviour {
             return;
         }
 
-        if (towerManager.getSelectedTurretPrefab() == null)
-        {
-            return;
-        }
         if (turret != null)
         {
-            Debug.Log("No Space");
+            upgrade.selectTurret(turret);
+            towerManager.deselect();
+            return;
+        }
+
+        if (towerManager.getSelectedTurretPrefab() == null)
+        {
             return;
         }
 
