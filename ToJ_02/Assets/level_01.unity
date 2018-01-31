@@ -4261,8 +4261,7 @@ MonoBehaviour:
     type: 2}
   bigAoePrefab: {fileID: 1947152437421150, guid: d8b2361181bdb9b4a8325d0dca704177,
     type: 2}
-  aroundTurretPrefab: {fileID: 1947152437421150, guid: d8b2361181bdb9b4a8325d0dca704177,
-    type: 2}
+  aroundTurretPrefab: {fileID: 187918, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 2}
   button1: {fileID: 1922545770}
   button2: {fileID: 1933629051}
   button3: {fileID: 225588731}
@@ -4271,7 +4270,7 @@ MonoBehaviour:
   icon1: {fileID: 21300000, guid: 05f7019b69e6c4e448ef48c30bdf96a0, type: 3}
   icon2: {fileID: 21300000, guid: 05f7019b69e6c4e448ef48c30bdf96a0, type: 3}
   icon3: {fileID: 21300000, guid: 05f7019b69e6c4e448ef48c30bdf96a0, type: 3}
-  icon4: {fileID: 21300000, guid: 05f7019b69e6c4e448ef48c30bdf96a0, type: 3}
+  icon4: {fileID: 21300000, guid: 7c30bda0cef33634abd04313c274a0c6, type: 3}
   turretStats: {fileID: 1119018565}
 --- !u!1 &640483746
 GameObject:
@@ -5896,7 +5895,7 @@ Prefab:
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 19.409092
+      value: 29.59091
       objectReference: {fileID: 0}
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
@@ -5906,7 +5905,7 @@ Prefab:
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 38.818184
+      value: 59.18182
       objectReference: {fileID: 0}
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
@@ -6329,7 +6328,7 @@ Prefab:
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 243.81818
+      value: 264.18182
       objectReference: {fileID: 0}
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
@@ -7451,7 +7450,7 @@ Prefab:
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 163.81818
+      value: 184.18182
       objectReference: {fileID: 0}
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
@@ -7878,7 +7877,7 @@ Prefab:
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 83.818184
+      value: 104.18182
       objectReference: {fileID: 0}
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
@@ -13185,7 +13184,7 @@ Prefab:
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 323.81818
+      value: 344.18182
       objectReference: {fileID: 0}
     - target: {fileID: 224702852628377826, guid: 3b0487b3ba8ee5e43b37c2c2ee821518,
         type: 2}
