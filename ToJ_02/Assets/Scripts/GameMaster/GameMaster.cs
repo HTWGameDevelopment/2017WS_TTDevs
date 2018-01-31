@@ -13,12 +13,13 @@ public class GameMaster : MonoBehaviour {
     public string creepTag = "Creep";
     public Button button;
     private bool nextwave = true;
+	public static int supposedCreeps = 0;
 
     private GameObject creep;
 
     // Use this for initialization
     void Start() {
-        StartCoroutine(readLevel("Levels/TestFile.txt"));
+		StartCoroutine(readLevel(PlayerPrefs.GetString("level")));
 
     }
 
@@ -78,6 +79,7 @@ public class GameMaster : MonoBehaviour {
                                                      "\nWindRes: " + windRes.ToString() + "%" +
                                                      "\nIceRes: " + iceRes.ToString() + "%"
                                                      , amount);
+				supposedCreeps += amount;
                 PlayerStats.single.resetDestroyedCreeps();
                 line = sr.ReadLine();
                 if (!firstwave && line != null)
@@ -99,8 +101,8 @@ public class GameMaster : MonoBehaviour {
             }
             sr.Close();
         }
-        Debug.Log("You Won");
-        //ToDo Open End Game Screen
+		print ("Creep Sum: " + supposedCreeps);
+		Debug.Log ("test");
     }
 
 

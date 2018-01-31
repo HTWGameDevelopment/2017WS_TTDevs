@@ -25,10 +25,12 @@ public class PlayerStats : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //print (health);
-        if (health <= 0)
-        {
-            Debug.Log("Game Over");
-        }
+		if (health <= 0) {
+			Debug.Log ("Game Over");
+			UnityEditor.SceneManagement.EditorSceneManager.LoadScene ("LevelLost");
+		} else if (health > 0 && allDestruction == GameMaster.supposedCreeps) {
+			UnityEditor.SceneManagement.EditorSceneManager.LoadScene ("LevelWon");
+		}
 	}
 
 	public void reduceHealth(int amount) {
@@ -74,4 +76,8 @@ public class PlayerStats : MonoBehaviour {
     {
         destroyedCreeps = 0;
     }
+
+	public int getAllDestruction() {
+		return allDestruction;
+	}
 }

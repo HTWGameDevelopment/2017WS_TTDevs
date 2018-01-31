@@ -1,4 +1,16 @@
 sceneSetups:
-- path: Assets/level_01.unity
+- path: Assets/Main Menu.unity
   isLoaded: 1
   isActive: 1
+- path: Assets/LevelSelect.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/level_01.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/LevelWon.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/LevelLost.unity
+  isLoaded: 0
+  isActive: 0

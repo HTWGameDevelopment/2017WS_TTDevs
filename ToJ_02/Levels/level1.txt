@@ -1,0 +1,7 @@
+creepType:amount:health:speed:reward:waveReward:fireResistance:windResistance:iceResistance
+1:10:200:5:20:100000:10:20:30
+2:10:50:8:10:1000:10:20:30
+3:10:30:20:20:1000:10:20:30
+2:10:10:10:5:1000:10:20:30
+3:10:20:5:5:1000:10:20:30
+1:10:120:5:20:1000:10:20:30
