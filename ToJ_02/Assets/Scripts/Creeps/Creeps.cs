@@ -40,9 +40,7 @@ public class Creeps : MonoBehaviour
     {
         if (health <= 0)
         {
-            PlayerStats.single.updateMoney(reward);
-            PlayerStats.single.creepDestroyed();
-            Destroy(gameObject);
+            DestroyCreep(true);
         }
     }
 
@@ -106,6 +104,26 @@ public class Creeps : MonoBehaviour
         speed = value;
     }
 
+    public void DestroyCreep(bool killed)
+    {
+        if (killed)
+        {
+            PlayerStats.single.updateMoney(reward);
+            PlayerStats.single.creepDestroyed();
+        }
+        if (wCoroutine != null)
+        {
+            StopCoroutine(wCoroutine);
+            Destroy(lt);
+        }
+        if (sCoroutine != null)
+        {
+            StopCoroutine(sCoroutine);
+            Destroy(lit);
+        }
+            Destroy(gameObject);
+    }
+
 
     public void setHealth(float value)
     {
@@ -154,6 +172,7 @@ public class Creeps : MonoBehaviour
                         else
                         {
                             StopCoroutine(wCoroutine);
+                            Destroy(lt);
                             wCoroutine = StartCoroutine(Weak(weakenDuration));
                         }
                     }
@@ -168,6 +187,7 @@ public class Creeps : MonoBehaviour
                         else
                         {
                             StopCoroutine(wCoroutine);
+                            Destroy(lt);
                             wCoroutine = StartCoroutine(Weak(weakenDuration));
                         }
                     }
@@ -192,7 +212,7 @@ public class Creeps : MonoBehaviour
                         else
                         {
                             StopCoroutine(sCoroutine);
-                            Destroy(lt);
+                            Destroy(lit);
                             sCoroutine = StartCoroutine(Slow(slowDuration));
                         }
                     }

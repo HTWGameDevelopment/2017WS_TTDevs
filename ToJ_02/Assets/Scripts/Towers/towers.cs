@@ -261,6 +261,7 @@ public class towers : MonoBehaviour {
     {
         GameObject target = null;
         GameObject[] creeps = GameObject.FindGameObjectsWithTag(creepTag);
+        bool shoot = false;
 
         foreach (GameObject creep in creeps)
         {
@@ -269,8 +270,16 @@ public class towers : MonoBehaviour {
             {
                 target = creep;
                 shoot4(target);
+                shoot = true;
             }
 
+        }
+        if (shoot)
+        {
+            Light lit = Instantiate(ligh, transform.position, transform.rotation);
+            lit.color = chooseColor();
+            lit.range = range;
+            Destroy(lit, 0.2f);
         }
     }
 
@@ -342,10 +351,7 @@ public class towers : MonoBehaviour {
         }
         else
         {
-            Light lit = Instantiate(ligh, transform.position, transform.rotation);
-            lit.color = chooseColor();
-            lit.range = range;
-            Destroy(lit, 0.3f);
+            
             Creeps shootTarget = target.GetComponent<Creeps>();
             shootTarget.checkDmg(dmg, element);
         }

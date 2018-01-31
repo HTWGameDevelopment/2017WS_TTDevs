@@ -13,6 +13,7 @@ public class PlayerStats : MonoBehaviour {
     public int health = 100;
     private int money = 0;
     private int destroyedCreeps = 0;
+    private int allDestruction;
 
     public Text cash;
 
@@ -23,8 +24,11 @@ public class PlayerStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//print (health);
-		
+        //print (health);
+        if (health <= 0)
+        {
+            Debug.Log("Game Over");
+        }
 	}
 
 	public void reduceHealth(int amount) {
@@ -59,10 +63,15 @@ public class PlayerStats : MonoBehaviour {
     public void creepDestroyed()
     {
         destroyedCreeps++;
+        allDestruction++;
     }
 
     public int getDestroyedCreeps()
     {
         return destroyedCreeps;
+    }
+    public void resetDestroyedCreeps()
+    {
+        destroyedCreeps = 0;
     }
 }

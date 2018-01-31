@@ -40,7 +40,7 @@ public class Upgrade : MonoBehaviour {
                             "\nRange: " + selectedTurret.GetComponent<towers>().getRange().ToString() +
                             "\nAttack Speed: " + selectedTurret.GetComponent<towers>().getSpd().ToString() +
                             "\nFocus Type: " + getFocus(selectedTurret.GetComponent<towers>().getFocus()) +
-                            "\nUpgrade Cost: " + ((int)(selectedTurret.GetComponent<towers>().getPrice() * 0.1f)).ToString();
+                            "\nUpgrade Cost: " + ((int)(selectedTurret.GetComponent<towers>().getPrice() * 0.3f)).ToString();
     }
 
     private string getElement(int type)

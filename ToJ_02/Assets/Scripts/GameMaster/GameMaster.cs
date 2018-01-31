@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour {
     public GameObject sphereCreep;
     public GameObject cubeCreep;
     public GameObject cylinderCreep;
     public Transform spawnPoint;
+    public string creepTag = "Creep";
+    public Button button;
+    private bool nextwave = true;
 
     private GameObject creep;
 
@@ -24,15 +28,22 @@ public class GameMaster : MonoBehaviour {
 
     }
 
+    public void nextWave()
+    {
+        button.gameObject.SetActive(false);
+        nextwave = true;
+    }
+
     IEnumerator readLevel(string filename)
     {
         using (StreamReader sr = new StreamReader(filename))
         {
+            bool firstwave = true;
             string line = sr.ReadLine();
+            line = sr.ReadLine();
 
             while (line != null)
             {
-                line = sr.ReadLine();
                 String[] substrings = line.Split(':'); 
                 int type;
                 int amount;
@@ -53,14 +64,43 @@ public class GameMaster : MonoBehaviour {
                 float.TryParse(substrings[7], out windRes);
                 float.TryParse(substrings[8], out iceRes);
 
+                GameObject[] creeps = GameObject.FindGameObjectsWithTag(creepTag);
+                while (creeps != null && creeps.Length != 0)
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    Array.Clear(creeps, 0, creeps.Length);
+                    creeps = GameObject.FindGameObjectsWithTag(creepTag);
+                }
+                showHealth.single.setWaveInformation("\n\nCreepType: " + type.ToString() +
+                                                     "\nHealth: " + health.ToString() +
+                                                     "\nSpeed: " + speed.ToString() +
+                                                     "\nFireRes: " + fireRes.ToString() + "%" +
+                                                     "\nWindRes: " + windRes.ToString() + "%" +
+                                                     "\nIceRes: " + iceRes.ToString() + "%"
+                                                     , amount);
+                PlayerStats.single.resetDestroyedCreeps();
+                line = sr.ReadLine();
+                if (!firstwave && line != null)
+                {
+                    button.gameObject.SetActive(true);
+                }
+                while (!nextwave && line != null)
+                {
+                    yield return new WaitForSeconds(0.5f);
+                }
+                Debug.Log("next Wave");
+                nextwave = false;
+                yield return new WaitForSeconds(.5f);
                 PlayerStats.single.updateMoney(waveReward);
                 StartCoroutine(spawnThem(type, amount, health, speed,reward,fireRes/100,windRes/100,iceRes/100));
-                yield return new WaitForSeconds(20f);
-
+                firstwave = false;
+                yield return new WaitForSeconds(0.5f);
+                
             }
             sr.Close();
-
         }
+        Debug.Log("You Won");
+        //ToDo Open End Game Screen
     }
 
 
