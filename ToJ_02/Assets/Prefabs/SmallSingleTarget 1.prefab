@@ -512,6 +512,10 @@ MonoBehaviour:
   price: 300
   element: 1
   focus: 2
+  fire: {r: 0.609, g: 0.025, b: 0, a: 1}
+  wind: {r: 0.71323526, g: 0.71323526, b: 0, a: 1}
+  ice: {r: 0, g: 0.025, b: 1, a: 1}
+  ligh: {fileID: 108304518508629738, guid: 7636213ef8301e046bea682cbe6e8571, type: 2}
   creepTag: Creep
   projectile: {fileID: 1284016506888784, guid: b772eca3940d1334f8fe23a8f7513dc4, type: 2}
   dir: {x: 0, y: 0, z: 0}

@@ -13,6 +13,9 @@ public class Creeps : MonoBehaviour
     public float fireRes;
     public float windRes;
     public float iceRes;
+    public Color wind;
+    public Color ice;
+    public Light ligh;
 
 
     public bool slowed = false;
@@ -219,9 +222,12 @@ public class Creeps : MonoBehaviour
     private IEnumerator Slow(float time)
     {
         slowed = true;
-        Debug.Log("slowed");
+        Light lit = Instantiate(ligh, transform.position, transform.rotation);
+        lit.transform.parent = transform;
+        lit.color = ice;
+        lit.range = 4.0f;
         yield return new WaitForSeconds(time);
-        Debug.Log("not slowed");
+        Destroy(lit);
         slowed = false;
         sCoroutine = null;
     }
@@ -229,9 +235,12 @@ public class Creeps : MonoBehaviour
     private IEnumerator Weak(float time)
     {
         weakened = true;
-        Debug.Log("weakened");
+        Light lt = Instantiate(ligh, transform.position, transform.rotation);
+        lt.transform.parent = transform;
+        lt.color = wind;
+        lt.range = 4.0f;
         yield return new WaitForSeconds(time);
-        Debug.Log("not weakened");
+        Destroy(lt);
         weakened = false;
         wCoroutine = null;
     }

@@ -124,3 +124,11 @@ MonoBehaviour:
   speed: 10
   creepType: 2
   reward: 20
+  fireRes: 0
+  windRes: 0
+  iceRes: 0
+  wind: {r: 0.71323526, g: 0.71323526, b: 0, a: 1}
+  ice: {r: 0, g: 0.025, b: 1, a: 1}
+  ligh: {fileID: 108658999065522682, guid: 36524871a9c77b74a808e9d7ea61b19c, type: 2}
+  slowed: 0
+  weakened: 0

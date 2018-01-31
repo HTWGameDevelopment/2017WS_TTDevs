@@ -90,7 +90,7 @@ public class Upgrade : MonoBehaviour {
 
     public void upgrade()
     {
-        int price = (int)(selectedTurret.GetComponent<towers>().getPrice()*0.1f);
+        int price = (int)(selectedTurret.GetComponent<towers>().getPrice()*0.2f);
         if (playerstats.enoughMoney(price))
         {
             playerstats.updateMoney(-price);

@@ -4,10 +4,9 @@ using UnityEngine;
 using System;
 
 public class towers : MonoBehaviour {
-
-
     public static float TYPE2EXPLOSIONRANGE = 7.0f;
     public static float TYPE3EXPLOSIONRANGE = 12.0f;
+    public static float BULLETSPEED = 50.0f;
     [Header("Attributes")]
 
     public int type;
@@ -20,13 +19,17 @@ public class towers : MonoBehaviour {
 
     [Header("OtherStuff")]
 
+    public Color fire;
+    public Color wind;
+    public Color ice;
+    public Light ligh;
     public string creepTag = "Creep";
     public GameObject projectile;
     public Vector3 dir;
     public GameObject lockTarget = null;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         InvokeRepeating("searchTarget" + type, 0f, 1/spd);
 //        InvokeRepeating("shoot", 0.1f, 1/spd);
@@ -86,6 +89,21 @@ public class towers : MonoBehaviour {
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    private Color chooseColor()
+    {
+        switch (element)
+        {
+            case 1:
+                return fire;
+            case 2:
+                return wind;
+            case 3:
+                return ice;
+            default:
+                return fire;
+        }
     }
 
     private void searchTarget(Action<GameObject> myMethod)
@@ -263,19 +281,23 @@ public class towers : MonoBehaviour {
             return;
         } else
         {
-            Creeps shootTarget = target.GetComponent<Creeps>();
-            shootTarget.checkDmg(dmg,element);
+            //Creeps shootTarget = target.GetComponent<Creeps>();
+            //shootTarget.checkDmg(dmg,element);
+
+            //Vector3 shootingPoint = transform.position;
+            //shootingPoint.y += 5f;
+            //GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
+            //dir = target.transform.position - shootingPoint;
+            //bullet.transform.Translate(dir.normalized * 10f, Space.World);
+            //Destroy(bullet, 2f);
 
             Vector3 shootingPoint = transform.position;
             shootingPoint.y += 5f;
             GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
-            dir = target.transform.position - shootingPoint;
-            bullet.transform.Translate(dir.normalized * 10f, Space.World);
-            Destroy(bullet, 2f);
+            bullet.GetComponent<Explode>().setTarget(target, dmg, false, 0.0f, element, BULLETSPEED, chooseColor());
 
 
         }
-
     }
 
     private void shoot2(GameObject target)
@@ -290,9 +312,7 @@ public class towers : MonoBehaviour {
             Vector3 shootingPoint = transform.position;
             shootingPoint.y += 5f;
             GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
-            dir = target.transform.position - shootingPoint;
-            bullet.transform.Translate(dir.normalized * 10f, Space.World);
-            bullet.GetComponent<Explode>().explode(dmg,element,TYPE2EXPLOSIONRANGE);
+            bullet.GetComponent<Explode>().setTarget(target, dmg, true, TYPE2EXPLOSIONRANGE, element, BULLETSPEED, chooseColor());
 
         }
     }
@@ -309,9 +329,7 @@ public class towers : MonoBehaviour {
             Vector3 shootingPoint = transform.position;
             shootingPoint.y += 5f;
             GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
-            dir = target.transform.position - shootingPoint;
-            bullet.transform.Translate(dir.normalized * 10f, Space.World);
-            bullet.GetComponent<Explode>().explode(dmg, element, TYPE3EXPLOSIONRANGE);
+            bullet.GetComponent<Explode>().setTarget(target, dmg, true, TYPE3EXPLOSIONRANGE, element, BULLETSPEED, chooseColor());
 
         }
     }
@@ -324,6 +342,10 @@ public class towers : MonoBehaviour {
         }
         else
         {
+            Light lit = Instantiate(ligh, transform.position, transform.rotation);
+            lit.color = chooseColor();
+            lit.range = range;
+            Destroy(lit, 0.3f);
             Creeps shootTarget = target.GetComponent<Creeps>();
             shootTarget.checkDmg(dmg, element);
         }

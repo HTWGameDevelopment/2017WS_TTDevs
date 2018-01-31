@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1284016506888784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 41.353367, y: -10.025307, z: 44.819324}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9dccf2dcc78efe741b7931e3bb85beaf, type: 2}
+  - {fileID: 2100000, guid: 893bbb86bfc08744ca5d3151eb375906, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creepTag: Creep
+  ligh: {fileID: 108304518508629738, guid: 7636213ef8301e046bea682cbe6e8571, type: 2}
 --- !u!135 &135274968597112078
 SphereCollider:
   m_ObjectHideFlags: 1
