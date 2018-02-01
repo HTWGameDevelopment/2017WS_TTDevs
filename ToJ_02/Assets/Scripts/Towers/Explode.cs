@@ -35,7 +35,7 @@ public class Explode : MonoBehaviour {
                 lt.transform.parent = goal.transform;
                 lt.color = color;
                 lt.range = range + 4.0f;
-                Destroy(lt, 0.3f);
+                Destroy(lt.gameObject, 0.3f);
                 explode();
                 return;
             }
@@ -43,7 +43,7 @@ public class Explode : MonoBehaviour {
             lit.transform.parent = goal.transform;
             lit.color = color;
             lit.range = 4.0f;
-            Destroy(lit, 0.3f);
+            Destroy(lit.gameObject, 0.3f);
             goal.GetComponent<Creeps>().checkDmg(dmg, element);
             Destroy(gameObject);
             return;

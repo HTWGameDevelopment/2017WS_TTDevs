@@ -279,7 +279,7 @@ public class towers : MonoBehaviour {
             Light lit = Instantiate(ligh, transform.position, transform.rotation);
             lit.color = chooseColor();
             lit.range = range;
-            Destroy(lit, 0.2f);
+            Destroy(lit.gameObject,0.25f);
         }
     }
 

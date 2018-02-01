@@ -114,12 +114,12 @@ public class Creeps : MonoBehaviour
         if (wCoroutine != null)
         {
             StopCoroutine(wCoroutine);
-            Destroy(lt);
+            Destroy(lt.gameObject);
         }
         if (sCoroutine != null)
         {
             StopCoroutine(sCoroutine);
-            Destroy(lit);
+            Destroy(lit.gameObject);
         }
             Destroy(gameObject);
     }
@@ -172,7 +172,7 @@ public class Creeps : MonoBehaviour
                         else
                         {
                             StopCoroutine(wCoroutine);
-                            Destroy(lt);
+                            Destroy(lt.gameObject);
                             wCoroutine = StartCoroutine(Weak(weakenDuration));
                         }
                     }
@@ -187,7 +187,7 @@ public class Creeps : MonoBehaviour
                         else
                         {
                             StopCoroutine(wCoroutine);
-                            Destroy(lt);
+                            Destroy(lt.gameObject);
                             wCoroutine = StartCoroutine(Weak(weakenDuration));
                         }
                     }
@@ -212,7 +212,7 @@ public class Creeps : MonoBehaviour
                         else
                         {
                             StopCoroutine(sCoroutine);
-                            Destroy(lit);
+                            Destroy(lit.gameObject);
                             sCoroutine = StartCoroutine(Slow(slowDuration));
                         }
                     }
@@ -228,7 +228,7 @@ public class Creeps : MonoBehaviour
                         {
 
                             StopCoroutine(sCoroutine);
-                            Destroy(lit);
+                            Destroy(lit.gameObject);
                             sCoroutine = StartCoroutine(Slow(slowDuration));
                         }
                     }
@@ -252,7 +252,7 @@ public class Creeps : MonoBehaviour
         lit.color = ice;
         lit.range = 4.0f;
         yield return new WaitForSeconds(time);
-        Destroy(lit);
+        Destroy(lit.gameObject);
         slowed = false;
         sCoroutine = null;
     }
@@ -265,7 +265,7 @@ public class Creeps : MonoBehaviour
         lt.color = wind;
         lt.range = 4.0f;
         yield return new WaitForSeconds(time);
-        Destroy(lt);
+        Destroy(lt.gameObject);
         weakened = false;
         wCoroutine = null;
     }
