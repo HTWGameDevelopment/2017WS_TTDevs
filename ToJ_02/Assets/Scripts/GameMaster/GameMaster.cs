@@ -6,6 +6,11 @@ using System.IO;
 using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour {
+    public static GameMaster single;
+    void Awake()
+    {
+        single = this;
+    }
     public GameObject sphereCreep;
     public GameObject cubeCreep;
     public GameObject cylinderCreep;
@@ -13,6 +18,8 @@ public class GameMaster : MonoBehaviour {
     public string creepTag = "Creep";
     public Button button;
     private bool nextwave = false;
+    public GameObject Pause;
+    private bool alldead = true;
 
     private GameObject creep;
 
@@ -27,7 +34,20 @@ public class GameMaster : MonoBehaviour {
         {
             TowerManager.single.selectTurret(-1);
         }
+        // Stops the game when Escape is pressed
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            button.gameObject.SetActive(false);
+            TowerManager.single.selectTurret(-1);
+        }
 
+    }
+
+    public bool waveStatus()
+    {
+        return alldead;
     }
 
     public void nextWave()
@@ -75,6 +95,7 @@ public class GameMaster : MonoBehaviour {
                     Array.Clear(creeps, 0, creeps.Length);
                     creeps = GameObject.FindGameObjectsWithTag(creepTag);
                 }
+                alldead = true;
                 showHealth.single.setWaveInformation("\nWave: " + waveCounter.ToString() +
                                                      "\n\nCreepType: " + type.ToString() +
                                                      "\nHealth: " + health.ToString() +
@@ -93,8 +114,8 @@ public class GameMaster : MonoBehaviour {
                 }
                 Debug.Log("next Wave");
                 nextwave = false;
-                yield return new WaitForSeconds(.5f);
                 StartCoroutine(spawnThem(type, amount, health, speed,reward,fireRes/100,windRes/100,iceRes/100));
+                alldead = false;
                 yield return new WaitForSeconds(0.5f);
                 line = sr.ReadLine();
 

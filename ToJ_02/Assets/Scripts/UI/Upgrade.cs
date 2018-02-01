@@ -96,7 +96,7 @@ public class Upgrade : MonoBehaviour {
         }
 
     }
-
+    // Sells the Turret
     public void Sell()
     {
         int sellValue = (int)(selectedTurret.GetComponent<towers>().getPrice() * 0.7f);

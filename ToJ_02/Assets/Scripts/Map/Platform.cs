@@ -36,6 +36,11 @@ public class Platform : MonoBehaviour {
     // makes the platform ract if u have a turret to build selected so u get visual feedback where u can build    
     void OnMouseEnter()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
@@ -56,6 +61,11 @@ public class Platform : MonoBehaviour {
     void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        if (Time.timeScale == 0)
         {
             return;
         }

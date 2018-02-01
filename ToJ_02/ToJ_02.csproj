@@ -290,6 +290,7 @@
     <Compile Include="Assets\Scripts\Map\Waypoints.cs" />
     <Compile Include="Assets\Scripts\Towers\Explode.cs" />
     <Compile Include="Assets\Scripts\Towers\towers.cs" />
+    <Compile Include="Assets\Scripts\UI\Esc.cs" />
     <Compile Include="Assets\Scripts\UI\LevelSelect.cs" />
     <Compile Include="Assets\Scripts\UI\LevelWon.cs" />
     <Compile Include="Assets\Scripts\UI\LoseButtons.cs" />
