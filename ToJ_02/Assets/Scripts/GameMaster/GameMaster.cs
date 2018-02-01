@@ -36,6 +36,7 @@ public class GameMaster : MonoBehaviour {
         nextwave = true;
     }
 
+    //Reads the csv file and starts the SpawnThem Coroutine with the read stats also updates the info text and waits after each wave for the player to press a button
     IEnumerator readLevel(string filename)
     {
         int waveCounter = 1;
@@ -128,6 +129,8 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
+
+    // actually spawns the creeps at spawn location
     IEnumerator spawnThem(int type, int amount, int health, float speed, int reward, float fireRes, float windRes,float iceRes)
     {
         switch (type)

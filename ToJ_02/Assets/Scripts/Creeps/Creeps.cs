@@ -104,6 +104,7 @@ public class Creeps : MonoBehaviour
         speed = value;
     }
 
+    // Stops everything and kills the creep
     public void DestroyCreep(bool killed)
     {
         if (killed)
@@ -130,6 +131,7 @@ public class Creeps : MonoBehaviour
         health = value;
     }
 
+    // calculates the dmg depending on dmg type and starts Debuff Coroutines
     public void checkDmg(float dmg,int dmgType)
     {
         
@@ -244,6 +246,7 @@ public class Creeps : MonoBehaviour
 
     }
 
+    // Slow defuff for the creep
     private IEnumerator Slow(float time)
     {
         slowed = true;
@@ -257,6 +260,7 @@ public class Creeps : MonoBehaviour
         sCoroutine = null;
     }
 
+    // weakening debuff for the creep
     private IEnumerator Weak(float time)
     {
         weakened = true;
@@ -270,6 +274,7 @@ public class Creeps : MonoBehaviour
         wCoroutine = null;
     }
 
+    // actually substracts the health
     private void takeDmg(float value)
     {
         if (weakened)

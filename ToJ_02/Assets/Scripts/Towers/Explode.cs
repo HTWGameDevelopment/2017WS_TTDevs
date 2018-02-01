@@ -17,6 +17,8 @@ public class Explode : MonoBehaviour {
     void Start()
     {
     }
+
+    // makes the projectile chase its given target until it reaches it then depending on projectile type explodes or just does dmg to chased target
     void Update()
     {
         if(goal == null)
@@ -54,7 +56,7 @@ public class Explode : MonoBehaviour {
     }
 
 
-
+    // sets the target and gives the projectile all his stats such as dmg and explosion range if it explodes
     public void setTarget(GameObject _goal, float _dmg, bool _explosion, float _range, int _element, float _speed, Color _color) 
     {
         goal = _goal;
@@ -67,6 +69,7 @@ public class Explode : MonoBehaviour {
         gameObject.GetComponent<Renderer>().material.color = _color;
     }
 
+    // lets the projectile explode damaging everithyng in its range
     public void explode()
     {
         GameObject[] creeps = GameObject.FindGameObjectsWithTag(creepTag);

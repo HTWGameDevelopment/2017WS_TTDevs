@@ -24,14 +24,10 @@ public class PlayerStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //print (health);
 		if (health <= 0) {
 			Debug.Log ("Game Over");
 			UnityEngine.SceneManagement.SceneManager.LoadScene ("LevelLost");
 		} 
-        //else if (health > 0 && allDestruction == GameMaster.supposedCreeps) {
-		//	UnityEngine.SceneManagement.SceneManager.LoadScene ("LevelWon");
-		//}
 	}
 
 	public void reduceHealth(int amount) {
@@ -46,7 +42,7 @@ public class PlayerStats : MonoBehaviour {
     {
         return money;
     }
-
+    //checks if enough money
     public bool enoughMoney(int price)
     {
         if (money - price < 0)

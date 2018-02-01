@@ -12,6 +12,7 @@ public class Upgrade : MonoBehaviour {
     }
 
     public Text turretStats;
+    //stores the selected already build turret so we can upgrade and change the turrets focus
     private GameObject selectedTurret = null;
     private PlayerStats playerstats;
     
@@ -32,15 +33,23 @@ public class Upgrade : MonoBehaviour {
         enableButtons(true);
         updateText();
     }
-
+    // shows the stats of the selected turret
     private void updateText()
     {
-        turretStats.text = "Element: " + getElement(selectedTurret.GetComponent<towers>().getElement()) +
-                            "\nDamage: " + selectedTurret.GetComponent<towers>().getDmg().ToString() +
-                            "\nRange: " + selectedTurret.GetComponent<towers>().getRange().ToString() +
-                            "\nAttack Speed: " + selectedTurret.GetComponent<towers>().getSpd().ToString() +
-                            "\nFocus Type: " + getFocus(selectedTurret.GetComponent<towers>().getFocus()) +
-                            "\nUpgrade Cost: " + ((int)(selectedTurret.GetComponent<towers>().getPrice() * 0.3f)).ToString();
+        if (selectedTurret == null)
+        {
+            turretStats.text = "";
+        }
+        else
+        {
+            turretStats.text = "Element: " + getElement(selectedTurret.GetComponent<towers>().getElement()) +
+                    "\nDamage: " + selectedTurret.GetComponent<towers>().getDmg().ToString() +
+                    "\nRange: " + selectedTurret.GetComponent<towers>().getRange().ToString() +
+                    "\nAttack Speed: " + selectedTurret.GetComponent<towers>().getSpd().ToString() +
+                    "\nFocus Type: " + getFocus(selectedTurret.GetComponent<towers>().getFocus()) +
+                    "\nUpgrade Cost: " + ((int)(selectedTurret.GetComponent<towers>().getPrice() * 0.3f)).ToString();
+        }
+
     }
 
     private string getElement(int type)
@@ -81,13 +90,22 @@ public class Upgrade : MonoBehaviour {
 
     private void enableButtons(bool test)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             transform.GetChild(i).gameObject.SetActive(test);
         }
 
     }
 
+    public void Sell()
+    {
+        int sellValue = (int)(selectedTurret.GetComponent<towers>().getPrice() * 0.7f);
+        playerstats.updateMoney(sellValue);
+        Destroy(selectedTurret.gameObject);
+        deselect();
+        updateText();
+    }
+    // upgrades the turret by calling the turrets upgrade function
     public void upgrade()
     {
         int price = (int)(selectedTurret.GetComponent<towers>().getPrice()*0.2f);
@@ -99,7 +117,7 @@ public class Upgrade : MonoBehaviour {
         }
         
     }
-
+    //sets the focus
     public void first()
     {
         selectedTurret.GetComponent<towers>().setFocus(2);

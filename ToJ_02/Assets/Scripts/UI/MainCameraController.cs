@@ -9,7 +9,7 @@ public class MainCameraController : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
+	// Cameramovement
 	void Update () {
 		float xAxisValue = Input.GetAxisRaw("Horizontal");
 		float zAxisValue = Input.GetAxisRaw("Vertical");

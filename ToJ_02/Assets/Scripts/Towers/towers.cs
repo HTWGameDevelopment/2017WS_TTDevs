@@ -47,7 +47,7 @@ public class towers : MonoBehaviour {
     public void upgrade()
     {
         dmg *= 1.1f;
-        price *= 1.1f;
+        price *= 1.2f;
     }
 
     public void setFocus(int value)
@@ -106,6 +106,8 @@ public class towers : MonoBehaviour {
         }
     }
 
+    // this function will either focus creeps closest to portel, closest to spawn or nearest to turret depending on chosen focus type(only if in range of turret)
+    // and then starts given shooting function with found target
     private void searchTarget(Action<GameObject> myMethod)
     {
         GameObject target = null;
@@ -242,6 +244,8 @@ public class towers : MonoBehaviour {
         myMethod(target);
     }
 
+
+    // next 4 functions will be called depending on turret type deciding its shooting type
     private void searchTarget1()
     {
         searchTarget(shoot1);
@@ -257,6 +261,7 @@ public class towers : MonoBehaviour {
         searchTarget(shoot3);
     }
 
+    // special targeting for the type 4 turret hitting everything in range
     private void searchTarget4()
     {
         GameObject target = null;
@@ -283,6 +288,7 @@ public class towers : MonoBehaviour {
         }
     }
 
+    // single target shot
     private void shoot1(GameObject target)
     {
         if (target == null)
@@ -298,7 +304,7 @@ public class towers : MonoBehaviour {
 
         }
     }
-
+    // small aoe shot
     private void shoot2(GameObject target)
     {
         if (target == null)
@@ -315,7 +321,7 @@ public class towers : MonoBehaviour {
 
         }
     }
-
+    // big aoe shot
     private void shoot3(GameObject target)
     {
         if (target == null)
@@ -332,7 +338,7 @@ public class towers : MonoBehaviour {
 
         }
     }
-
+    // just dmg without spawning projectile
     private void shoot4(GameObject target)
     {
         if (target == null)

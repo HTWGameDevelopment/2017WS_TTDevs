@@ -59,7 +59,7 @@ public class TowerManager : MonoBehaviour {
         Upgrade.single.deselect();
         showTurretInfo();
     }
-
+    // shows the turret Info in the menu
     private void showTurretInfo()
     {
         if (selectedTurret == -1)
@@ -77,6 +77,7 @@ public class TowerManager : MonoBehaviour {
 
 
     }
+
     public void deselect()
     {
         selectedTurret = -1;
@@ -155,7 +156,7 @@ public class TowerManager : MonoBehaviour {
         return turretsToSelect[selectedTurret, 6];
     }
 
-
+    //reads the 5 Turrets from the csv File and generates the actual stats from the modules wich are saved there
     private void readTurretInfo(string filename)
     {
         using (StreamReader sr = new StreamReader(filename))
@@ -202,6 +203,7 @@ public class TowerManager : MonoBehaviour {
         return stat;
     }
 
+    //sets the Icons of the buttons depending on the read turret Infos
     private void setUpButtonIcons()
     {
         button1.GetComponent<Image>().sprite = getIcon((int)turretsToSelect[0, 0]);

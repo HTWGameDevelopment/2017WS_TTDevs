@@ -23,7 +23,7 @@ public class showHealth : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
+	// Updates the creeps destroyed and health every frame
 	void Update () {
 		health = PlayerStats.single.getHealth ();
         creepCount = PlayerStats.single.getDestroyedCreeps();

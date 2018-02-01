@@ -33,7 +33,7 @@ public class Platform : MonoBehaviour {
         r = GetComponent<Renderer>();
         old = r.material.color;
     }
-        
+    // makes the platform ract if u have a turret to build selected so u get visual feedback where u can build    
     void OnMouseEnter()
     {
         if (EventSystem.current.IsPointerOverGameObject())
@@ -52,7 +52,7 @@ public class Platform : MonoBehaviour {
     {
         r.material.color = old;
     }
-
+    // Either Builds the selected Turret to build or if there is already a turret on this platform selects that one and shows its range
     void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
