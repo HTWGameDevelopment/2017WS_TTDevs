@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TurretSelection : MonoBehaviour,IPointerDownHandler {
+public class TurretSelection : MonoBehaviour, IPointerDownHandler
+{
 
     private TowerManager towerManager;
     private PlayerStats playerStats;

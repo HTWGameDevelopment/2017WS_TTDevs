@@ -19,12 +19,14 @@ public class GameMaster : MonoBehaviour {
     // Use this for initialization
     void Start() {
 		StartCoroutine(readLevel(PlayerPrefs.GetString("level")));
-
     }
 
     // Update is called once per frame
     void Update() {
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            TowerManager.single.selectTurret(-1);
+        }
 
     }
 
@@ -36,6 +38,7 @@ public class GameMaster : MonoBehaviour {
 
     IEnumerator readLevel(string filename)
     {
+        int waveCounter = 1;
         GameObject[] creeps;
         using (StreamReader sr = new StreamReader(filename))
         {
@@ -72,13 +75,15 @@ public class GameMaster : MonoBehaviour {
                     Array.Clear(creeps, 0, creeps.Length);
                     creeps = GameObject.FindGameObjectsWithTag(creepTag);
                 }
-                showHealth.single.setWaveInformation("\n\nCreepType: " + type.ToString() +
+                showHealth.single.setWaveInformation("\nWave: " + waveCounter.ToString() +
+                                                     "\n\nCreepType: " + type.ToString() +
                                                      "\nHealth: " + health.ToString() +
                                                      "\nSpeed: " + speed.ToString() +
                                                      "\nFireRes: " + fireRes.ToString() + "%" +
                                                      "\nWindRes: " + windRes.ToString() + "%" +
                                                      "\nIceRes: " + iceRes.ToString() + "%"
                                                      , amount);
+                waveCounter++;
                 PlayerStats.single.updateMoney(waveReward);
                 PlayerStats.single.resetDestroyedCreeps();
                 if (!firstwave)

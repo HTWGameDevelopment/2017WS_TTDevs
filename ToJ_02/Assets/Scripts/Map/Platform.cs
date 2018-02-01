@@ -12,10 +12,20 @@ public class Platform : MonoBehaviour {
     private Color old;
     public Vector3 buildOfSet;
     private TowerManager towerManager;
+    public GameObject rangeIndicator;
+    private GameObject range;
 
 
     private GameObject turret;
 
+    void Update()
+    {
+        if (Upgrade.single.getSelectedTurret() != turret || Upgrade.single.getSelectedTurret() == null)
+        {
+            Destroy(range);
+        }
+
+    }
     void Start()
     {
         upgrade = Upgrade.single;
@@ -52,7 +62,15 @@ public class Platform : MonoBehaviour {
 
         if (turret != null)
         {
+            if (Upgrade.single.getSelectedTurret() != turret)
+            {
+                Vector3 spawnpoint = transform.position;
+                spawnpoint.y -= 0.1f;
+                range = (GameObject)Instantiate(rangeIndicator, spawnpoint, transform.rotation);
+                range.gameObject.transform.localScale += new Vector3(turret.GetComponent<towers>().getRange() * 2.0f, 0, turret.GetComponent<towers>().getRange() * 2.0f);
+            }
             upgrade.selectTurret(turret);
+
             towerManager.deselect();
             return;
         }
