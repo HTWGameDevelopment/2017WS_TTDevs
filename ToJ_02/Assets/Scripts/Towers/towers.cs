@@ -290,19 +290,9 @@ public class towers : MonoBehaviour {
             return;
         } else
         {
-            //Creeps shootTarget = target.GetComponent<Creeps>();
-            //shootTarget.checkDmg(dmg,element);
-
-            //Vector3 shootingPoint = transform.position;
-            //shootingPoint.y += 5f;
-            //GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
-            //dir = target.transform.position - shootingPoint;
-            //bullet.transform.Translate(dir.normalized * 10f, Space.World);
-            //Destroy(bullet, 2f);
-
             Vector3 shootingPoint = transform.position;
             shootingPoint.y += 5f;
-            GameObject bullet = Instantiate(projectile, shootingPoint, transform.rotation);
+            GameObject bullet = (GameObject)Instantiate(projectile, shootingPoint, transform.rotation);
             bullet.GetComponent<Explode>().setTarget(target, dmg, false, 0.0f, element, BULLETSPEED, chooseColor());
 
 

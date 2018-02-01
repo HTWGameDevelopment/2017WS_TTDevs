@@ -286,9 +286,9 @@
     <Compile Include="Assets\Scripts\Creeps\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\GameMaster\GameMaster.cs" />
     <Compile Include="Assets\Scripts\GameMaster\TowerManager.cs" />
-    <Compile Include="Assets\Scripts\GameMaster\Waypoints.cs" />
     <Compile Include="Assets\Scripts\Map\Platform.cs" />
     <Compile Include="Assets\Scripts\Map\spawn.cs" />
+    <Compile Include="Assets\Scripts\Map\Waypoints.cs" />
     <Compile Include="Assets\Scripts\Towers\Explode.cs" />
     <Compile Include="Assets\Scripts\Towers\towers.cs" />
     <Compile Include="Assets\Scripts\UI\LevelSelect.cs" />

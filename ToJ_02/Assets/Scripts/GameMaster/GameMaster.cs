@@ -12,7 +12,7 @@ public class GameMaster : MonoBehaviour {
     public Transform spawnPoint;
     public string creepTag = "Creep";
     public Button button;
-    private bool nextwave = true;
+    private bool nextwave = false;
 
     private GameObject creep;
 
@@ -42,7 +42,6 @@ public class GameMaster : MonoBehaviour {
         GameObject[] creeps;
         using (StreamReader sr = new StreamReader(filename))
         {
-            bool firstwave = true;
             string line = sr.ReadLine();
             line = sr.ReadLine();
 
@@ -86,10 +85,7 @@ public class GameMaster : MonoBehaviour {
                 waveCounter++;
                 PlayerStats.single.updateMoney(waveReward);
                 PlayerStats.single.resetDestroyedCreeps();
-                if (!firstwave)
-                {
-                    button.gameObject.SetActive(true);
-                }
+                button.gameObject.SetActive(true);
                 while (!nextwave)
                 {
                     yield return new WaitForSeconds(0.5f);
@@ -98,7 +94,6 @@ public class GameMaster : MonoBehaviour {
                 nextwave = false;
                 yield return new WaitForSeconds(.5f);
                 StartCoroutine(spawnThem(type, amount, health, speed,reward,fireRes/100,windRes/100,iceRes/100));
-                firstwave = false;
                 yield return new WaitForSeconds(0.5f);
                 line = sr.ReadLine();
 
