@@ -27,10 +27,11 @@ public class PlayerStats : MonoBehaviour {
         //print (health);
 		if (health <= 0) {
 			Debug.Log ("Game Over");
-			UnityEditor.SceneManagement.EditorSceneManager.LoadScene ("LevelLost");
-		} else if (health > 0 && allDestruction == GameMaster.supposedCreeps) {
-			UnityEditor.SceneManagement.EditorSceneManager.LoadScene ("LevelWon");
-		}
+			UnityEngine.SceneManagement.SceneManager.LoadScene ("LevelLost");
+		} 
+        //else if (health > 0 && allDestruction == GameMaster.supposedCreeps) {
+		//	UnityEngine.SceneManagement.SceneManager.LoadScene ("LevelWon");
+		//}
 	}
 
 	public void reduceHealth(int amount) {

@@ -13,7 +13,6 @@ public class GameMaster : MonoBehaviour {
     public string creepTag = "Creep";
     public Button button;
     private bool nextwave = true;
-	public static int supposedCreeps = 0;
 
     private GameObject creep;
 
@@ -37,6 +36,7 @@ public class GameMaster : MonoBehaviour {
 
     IEnumerator readLevel(string filename)
     {
+        GameObject[] creeps;
         using (StreamReader sr = new StreamReader(filename))
         {
             bool firstwave = true;
@@ -65,7 +65,7 @@ public class GameMaster : MonoBehaviour {
                 float.TryParse(substrings[7], out windRes);
                 float.TryParse(substrings[8], out iceRes);
 
-                GameObject[] creeps = GameObject.FindGameObjectsWithTag(creepTag);
+                creeps = GameObject.FindGameObjectsWithTag(creepTag);
                 while (creeps != null && creeps.Length != 0)
                 {
                     yield return new WaitForSeconds(0.5f);
@@ -79,30 +79,40 @@ public class GameMaster : MonoBehaviour {
                                                      "\nWindRes: " + windRes.ToString() + "%" +
                                                      "\nIceRes: " + iceRes.ToString() + "%"
                                                      , amount);
-				supposedCreeps += amount;
+                PlayerStats.single.updateMoney(waveReward);
                 PlayerStats.single.resetDestroyedCreeps();
-                line = sr.ReadLine();
-                if (!firstwave && line != null)
+                if (!firstwave)
                 {
                     button.gameObject.SetActive(true);
                 }
-                while (!nextwave && line != null)
+                while (!nextwave)
                 {
                     yield return new WaitForSeconds(0.5f);
                 }
                 Debug.Log("next Wave");
                 nextwave = false;
                 yield return new WaitForSeconds(.5f);
-                PlayerStats.single.updateMoney(waveReward);
                 StartCoroutine(spawnThem(type, amount, health, speed,reward,fireRes/100,windRes/100,iceRes/100));
                 firstwave = false;
                 yield return new WaitForSeconds(0.5f);
-                
+                line = sr.ReadLine();
+
             }
             sr.Close();
         }
-		print ("Creep Sum: " + supposedCreeps);
-		Debug.Log ("test");
+
+        creeps = GameObject.FindGameObjectsWithTag(creepTag);
+        while (creeps != null && creeps.Length != 0)
+        {
+            yield return new WaitForSeconds(0.5f);
+            Array.Clear(creeps, 0, creeps.Length);
+            creeps = GameObject.FindGameObjectsWithTag(creepTag);
+        }
+
+        if (PlayerStats.single.getHealth() > 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("LevelWon");
+        }
     }
 
 
